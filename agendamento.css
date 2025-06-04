@@ -1,0 +1,589 @@
+body {
+  background-color: #1c322b;
+  font-family: 'Playfair Display', serif;
+  color: #244236;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  background-color: #f9f5ec;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+h2 {
+  color: #2c3c6f;
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Etapas com transição suave */
+.step {
+  display: none;
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  width: 100%;
+}
+
+.step.active {
+  display: block;
+  opacity: 1;
+  transform: translateX(0);
+}
+button {
+  margin-top: 1.5rem;
+}
+.card-servico {
+  margin-bottom: 2rem; /* já ajuda a dar espaço para o botão */
+}
+
+.step.active {
+  opacity: 1;
+  transform: translateX(0);
+  position: relative;
+  visibility: visible;
+}
+
+
+.card-servico {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  border: 2px solid #75897d;
+  background-color: #e7e4c5;
+  padding: 1rem;
+  border-radius: 1.25rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+  #btnEtapa1 {
+    background-color: gray;
+    cursor: not-allowed;
+    opacity: 0.6;
+    transition: background-color 0.3s ease;
+  }
+
+  #btnEtapa1.ativo {
+    background-color: #244236; /* verde escuro */
+    cursor: pointer;
+    opacity: 1;
+  }
+
+.card-servico:hover {
+  background-color: #f3f1e4;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.card-servico.selected {
+  border-color: #2c3c6f;
+  background-color: #d1caa7;
+  box-shadow: 0 0 0 4px rgba(44, 60, 111, 0.2);
+  transform: scale(1.02);
+}
+
+.card-maquiagem.selecionado {
+  border: 2px solid #2c3c6f;
+  background-color: #e7e4c5;
+  box-shadow: 0 0 0 4px rgba(44, 60, 111, 0.2);
+}
+
+button {
+  background-color: #244236;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.75rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #2e5a47;
+}
+
+button:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Acessibilidade - foco no botão */
+button:focus {
+  outline: 3px solid #2c3c6f;
+  outline-offset: 2px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #75897d;
+  border-radius: 0.75rem;
+  background-color: #f9f5ec;
+  color: #244236;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #75897d;
+}
+
+.resumo {
+  background-color: #e7e4c5;
+  padding: 1rem;
+  border-radius: 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #75897d;
+}
+
+.sucesso {
+    background-color: #244236;
+    color: #f9f5ec;
+    padding: 40px;
+    text-align: center;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .sucesso h2 {
+    font-size: 26px;
+    margin-bottom: 12px;
+    color: #e7e4c5;
+  }
+
+  .sucesso p {
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+
+  .sucesso button {
+    background-color: #75897d;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .sucesso button:hover {
+    background-color: #5f6f66;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+/* Imagem nos cards */
+.imagem-servico {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 1rem;
+  flex-shrink: 0;
+  border: 2px solid #75897d;
+}
+
+.conteudo-servico {
+  flex: 1;
+}
+
+@media (max-width: 600px) {
+  .card-servico {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .imagem-servico {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* Barra de progresso */
+.progresso {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  padding: 0 0.5rem;
+}
+
+.etapa-indicador {
+  width: 22%;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #75897d;
+  font-weight: bold;
+  position: relative;
+  z-index: 2;
+  cursor: default;
+}
+
+.etapa-indicador::before {
+  content: "";
+  display: block;
+  width: 34px;
+  height: 34px;
+  margin: 0 auto 5px;
+  border: 2px solid #75897d;
+  border-radius: 50%;
+  background-color: #e7e4c5;
+  line-height: 34px;
+  font-weight: bold;
+  font-size: 16px;
+  color: #2c3c6f;
+  position: relative;
+  z-index: 3;
+}
+
+.etapa-indicador:not(.active)::before {
+  opacity: 0.6;
+}
+
+.etapa-indicador.active {
+  color: #2c3c6f;
+}
+
+.etapa-indicador.active::before {
+  background-color: #2c3c6f;
+  color: white;
+  border-color: #2c3c6f;
+}
+
+.linha-progresso {
+  position: absolute;
+  top: 17px;
+  left: 8%;
+  right: 8%;
+  height: 2px;
+  background-color: #75897d;
+  z-index: 1;
+}
+
+/* Carrossel */
+.carrossel-container {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.carrossel {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 1rem 0;
+}
+
+.carrossel .card-servico {
+  min-width: 250px;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.card-servico img {
+  width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+}
+
+.carrossel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #244236;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1;
+  transition: background 0.3s;
+}
+
+.carrossel-btn:hover {
+  background-color: #2e5a47;
+}
+
+.carrossel-btn.left {
+  left: -10px;
+}
+
+.carrossel-btn.right {
+  right: -10px;
+}
+
+.imagem-container {
+  position: relative;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  height: 200px;
+}
+
+.imagem-fundo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.5);
+}
+
+.overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  z-index: 2;
+  padding: 0 1rem;
+}
+
+
+.card-servico {
+  position: relative;
+  height: 180px;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: transparent;
+  border: 2px solid #75897d;
+}
+
+.imagem-overlay {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.6); /* escurece um pouco a imagem */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.conteudo-overlay {
+  position: absolute;
+  z-index: 2;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}
+
+.card-servico.selected {
+  border-color: #2c3c6f;
+  box-shadow: 0 0 0 4px rgba(44, 60, 111, 0.2);
+  transform: scale(1.02);
+}
+
+.imagem-container-servico {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  border-radius: 1.25rem;
+  overflow: hidden;
+}
+
+.imagem-servico-fundo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.6); /* Escurece levemente */
+}
+
+.overlay-escuro {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent 40%);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 1rem;
+  color: #fff;
+}
+
+.conteudo-overlay {
+  text-align: center;
+}
+
+.conteudo-overlay h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.1rem;
+}
+
+.conteudo-overlay p {
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.conteudo-overlay small {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.8rem;
+}
+
+.imagem-servico-fundo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.4) saturate(0.8); /* Mais escuro e menos saturado */
+}
+
+.overlay-escuro {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.4), transparent 40%);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 1rem;
+  color: #244236; /* Texto verde escuro */
+}
+
+button.voltar {
+  background-color: #b02f2f; /* vermelho escuro */
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: background-color 0.3s ease;
+}
+
+button.voltar:hover {
+  background-color: #8e2424;
+}
+.fc-daygrid-day.available {
+  background-color: #d4edda !important; /* verde claro */
+}
+.fc-daygrid-day.unavailable {
+  background-color: #f8d7da !important; /* vermelho claro */
+}
+#listaHorarios li {
+  padding: 5px;
+  margin: 3px 0;
+  border-radius: 4px;
+}
+@media (max-width: 768px) {
+  .container {
+    margin: 20px 10px;
+    padding: 1.25rem;
+    border-radius: 1rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .card-servico {
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+  }
+
+  .conteudo-overlay h3 {
+    font-size: 1rem;
+  }
+
+  .conteudo-overlay p {
+    font-size: 0.85rem;
+  }
+
+  .imagem-servico {
+    width: 100%;
+    height: auto;
+  }
+
+  .step {
+    padding: 0;
+  }
+
+  .resumo {
+    font-size: 0.95rem;
+  }
+
+  .progresso {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .etapa-indicador {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .linha-progresso {
+    display: none;
+  }
+
+  .sucesso {
+    padding: 1.5rem;
+  }
+
+  .sucesso h2 {
+    font-size: 1.5rem;
+  }
+
+  .sucesso p {
+    font-size: 1rem;
+  }
+
+  button, .sucesso button {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
+
+  .carrossel .card-servico {
+    min-width: 220px;
+  }
+
+  .imagem-container-servico,
+  .imagem-servico-fundo {
+    height: 160px;
+  }
+
+  .overlay-escuro {
+    font-size: 0.9rem;
+    padding: 0.75rem;
+  }
+
+  input, select, textarea {
+    font-size: 1rem;
+  }
+}

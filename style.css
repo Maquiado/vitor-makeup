@@ -1,0 +1,406 @@
+/* Reset e Fonte */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Playfair Display', serif;
+  background-color: #f9f7f1;
+  color: #244236;
+  line-height: 1.6;
+}
+
+/* Cabeçalho */
+header.topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #244236;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+
+.logo-area img {
+  height: 50px;
+  transition: transform 0.3s ease;
+}
+
+.logo-area img:hover {
+  transform: scale(1.05);
+}
+
+nav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+nav a:hover {
+  color: #e7e4c5;
+}
+
+.btn-agendar {
+  background-color: #e7e4c5;
+  color: #244236;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.btn-agendar:hover {
+  background-color: #dcd8b7;
+  transform: scale(1.05);
+}
+
+.btn-adm {
+  background-color: #e7e4c5;
+  color: #244236;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.btn-adm:hover {
+  background-color: #dcd8b7;
+  transform: scale(1.05);
+}
+
+/* HERO */
+.hero {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 0;
+  background-color: #f1efe7;
+}
+
+.hero-img-slider {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  border-radius: 0;
+}
+
+.slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.hero-text {
+  max-width: 400px;
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-align: left;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Serviços */
+.servicos {
+  text-align: center;
+  padding: 3rem 2rem;
+  background-color: #fff;
+}
+
+.servicos h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.servico-lista {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 1rem;
+  overflow-x: auto;
+}
+
+.servico-item {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1.2rem;
+  min-width: 200px;
+  max-width: 250px;
+  flex: 0 0 auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+  text-align: center;
+}
+
+.servico-item:hover {
+  transform: translateY(-5px);
+}
+
+.servico-item img {
+  height: 60px;
+  margin-bottom: 1rem;
+}
+
+/* Portfólio */
+.portfolio {
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.portfolio h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.icone-port {
+  width: 40px;
+  margin-bottom: 1.5rem;
+}
+
+.portfolio-imagens {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 1rem;
+  justify-content: flex-start;
+  padding: 1rem 0;
+}
+
+.portfolio-imagens div {
+  flex: 0 0 auto;
+}
+
+.portfolio-imagens img {
+  width: 160px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.portfolio-imagens img:hover {
+  transform: scale(1.05);
+}
+
+/* Rodapé */
+footer {
+  background-color: #244236;
+  color: #fff;
+  text-align: center;
+  padding: 1.5rem 1rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  header.topo {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding: 0.8rem 1.2rem;
+  }
+
+  .logo-area img {
+    height: 40px;
+  }
+
+  nav {
+    gap: 0.5rem;
+  }
+
+  .hero {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .hero-text {
+    font-size: 1.2rem;
+    max-width: 240px;
+  }
+
+  .hero-img-slider {
+    max-width: 200px;
+  }
+
+  .servicos h2 {
+    font-size: 1.6rem;
+  }
+
+  .servico-item {
+    min-width: 160px;
+    padding: 1rem;
+  }
+
+  .portfolio h2 {
+    font-size: 1.6rem;
+  }
+
+  .portfolio-imagens img {
+    width: 140px;
+  }
+}
+
+
+/*Fidelidade*/
+.fidelidade {
+  background-image: url('img/bg-bocas.png'); /* ajuste o caminho se necessário */
+  background-repeat: repeat;
+  background-size: auto;
+  background-color: #7e1b1b; /* cor de fundo de base semelhante ao vermelho da imagem */
+  padding: 4rem 2rem;
+  color: #fef9f4;
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+}
+
+.fidelidade-container {
+  max-width: 600px;
+  margin: auto;
+  background-color: #f5f0e8;
+  border-radius: 16px;
+  padding: 30px 20px;
+  color: #19352f;
+}
+
+.fidelidade-titulo {
+  font-size: 2.2rem;
+  color: #19352f;
+  margin-bottom: 20px;
+}
+
+.fidelidade-descricao {
+  font-size: 1rem;
+  color: #19352f;
+  margin-bottom: 30px;
+}
+
+.fidelidade-form {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.input-telefone {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  width: 220px;
+}
+
+.botao-buscar {
+  background-color: #19352f;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.botao-buscar:hover {
+  background-color: #285445;
+}
+
+.resultado-bocas {
+  margin-top: 20px;
+}
+
+.nome-cliente {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.area-bocas img {
+  width: 32px;
+  height: 32px;
+  margin: 0 4px;
+}
+
+.mensagem-bonus {
+  color: #b22222;
+  font-weight: bold;
+  margin-top: 12px;
+}
+
+@media (max-width: 480px) {
+  .fidelidade {
+    padding: 2rem 1rem;
+  }
+
+  .fidelidade-container {
+    padding: 20px 15px;
+  }
+
+  .fidelidade-titulo {
+    font-size: 1.8rem;
+  }
+
+  .fidelidade-descricao {
+    font-size: 0.95rem;
+  }
+
+  .input-telefone {
+    width: 100%;
+  }
+
+  .fidelidade-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .botao-buscar {
+    width: 100%;
+  }
+
+  .area-bocas img {
+    width: 28px;
+    height: 28px;
+    margin: 3px;
+  }
+}

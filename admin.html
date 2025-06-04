@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Painel Admin</title>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-compat.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="admin.css" /> 
+  <style>
+    @media (max-width: 640px) {
+      #controle {
+        padding: 10px;
+      }
+      .fc-toolbar-title {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body class="bg-[#1c322b] p-4 sm:p-6">
+
+  <!-- Logo -->
+  <div class="max-w-4xl mx-auto mb-4 flex justify-center">
+    <img src="img/logo1.png" alt="Logo" class="h-16 sm:h-20" />
+  </div>
+
+  <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-md">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl font-bold text-verde-escuro flex items-center gap-2">
+        <img src="img/espelho.png" alt="Ícone" class="w-6 h-6"> Painel de Agendamentos
+      </h1>
+      <button onclick="logout()" class="text-sm bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Sair</button>
+    </div>
+
+    <!-- Filtros -->
+    <div class="flex gap-4 mb-4 flex-wrap">
+      <input type="text" id="filtroNome" placeholder="Buscar por nome..." class="p-2 border rounded-md w-full sm:w-1/2"/>
+      <input type="date" id="filtroData" class="p-2 border rounded-md w-full sm:w-1/2"/>
+      <button onclick="carregarAgendamentos(true)" class="bg-verde-escuro text-white px-4 py-2 rounded-md hover:bg-verde-escuro">Filtrar</button>
+<div class="flex gap-2 mb-4">
+  <button onclick="filtrarStatus('todos')" class="filtro-btn bg-blue-600 text-white px-3 py-1 rounded">Todos</button>
+  <button onclick="filtrarStatus('pendente')" class="filtro-btn bg-yellow-600 text-white px-3 py-1 rounded">Pendentes</button>
+  <button onclick="filtrarStatus('realizado')" class="filtro-btn bg-green-700 text-white px-3 py-1 rounded">Realizados</button>
+</div>
+
+    <div id="listaAgendamentos" class="space-y-2"></div>
+
+    <!-- Paginação -->
+    <div class="flex justify-between mt-6">
+      <button id="btnAnterior" onclick="paginaAnterior()" class="px-4 py-2 bg-gray-300 rounded disabled:opacity-50">Anterior</button>
+      <button id="btnProximo" onclick="proximaPagina()" class="px-4 py-2 bg-verde-escuro text-white rounded">Próximo</button>
+    </div>
+  </div>
+
+  <!-- Modal editar -->
+  <div id="modalEditar" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+  <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
+    <h2 class="text-lg font-bold mb-4 text-center">Editar Agendamento</h2>
+
+    <label class="block text-sm font-medium">Data</label>
+    <input type="date" id="editData" class="w-full border rounded px-3 py-2 mb-2">
+
+    <label class="block text-sm font-medium">Hora</label>
+    <input type="time" id="editHora" class="w-full border rounded px-3 py-2 mb-2">
+
+    <label class="block text-sm font-medium">Tipo de Maquiagem</label>
+    <input type="text" id="editTipo" class="w-full border rounded px-3 py-2 mb-2">
+
+    <label class="block text-sm font-medium">Valor</label>
+    <input type="text" id="editValor" class="w-full border rounded px-3 py-2 mb-2">
+
+    <label class="block text-sm font-medium">Telefone</label>
+    <input type="text" id="editTelefone" class="w-full border rounded px-3 py-2 mb-4">
+
+    <div class="flex justify-end gap-2">
+      <button onclick="fecharModal()" class="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500">Cancelar</button>
+      <button onclick="salvarEdicao()" class="bg-verde-escuro text-white px-4 py-2 rounded hover:bg-green-700">Salvar</button>
+    </div>
+  </div>
+</div>
+
+  <div id="calendar" class="mt-6"></div>
+
+  <div id="controle" class="mt-4" style="display:none">
+    <h3 class="font-semibold text-lg mb-2">Disponibilidade para <span id="dataSelecionada"></span></h3>
+    <form id="formHorarios">
+      <div id="horariosDisponiveis" class="flex flex-wrap gap-2"></div>
+      <button type="submit" class="mt-4 bg-verde-escuro text-white px-4 py-2 rounded hover:bg-verde-escuro">Salvar Disponibilidade</button>
+    </form>
+  </div>
+
+  <button id="abrirAgendaBtn" class="mt-6 bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800">
+    Abrir Agenda
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+  <script src="admin.js"></script>
+
+  <div id="toast" class="fixed top-4 right-4 z-50 hidden bg-verde-escuro text-white px-4 py-2 rounded shadow-lg transition-opacity duration-300"></div>
+
+  <audio id="somNotificacao" src="https://notificationsounds.com/notification-sounds/eventually-590/download/mp3" preload="auto"></audio>
+</body>
+</html>

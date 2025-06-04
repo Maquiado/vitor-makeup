@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vitor Makeup</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="topo">
+    <div class="logo-area">
+      <img src="img/logo2.png" alt="Vitor Makeup Logo" />
+    </div>
+    <nav>
+      <a href="#inicio">Início</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#servicos">Serviços</a>
+      <a href="admin.html" class="btn-adm">Painel Admin</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-img-slider">
+      <img src="img/foto1.png" alt="Makeup 1" class="slide active" />
+      <img src="img/foto2.png" alt="Makeup 2" class="slide" />
+      <img src="img/foto3.png" alt="Makeup 3" class="slide" />
+    </div>
+    <div class="hero-text">
+      <h1>Realce sua beleza com técnica e durabilidade</h1>
+     <button class="btn-agendar" onclick="window.location.href='agendamento.html'">
+  Agende seu horário
+</button>
+    </div>
+  </section>
+
+<section class="fidelidade">
+  <div class="fidelidade-container">
+    <h2 class="fidelidade-titulo">Programa de Fidelidade</h2>
+    <p class="fidelidade-descricao">
+      A cada maquiagem, uma boca.<br />
+      Com 5, ganhe uma maquiagem exclusiva.
+    </p>
+
+    <div class="fidelidade-form">
+      <input
+        id="telefoneBusca"
+        type="text"
+        placeholder="Digite seu WhatsApp"
+        class="input-telefone"
+      />
+      <button onclick="buscarBocas()" class="botao-buscar">
+        Ver Minhas Bocas
+      </button>
+    </div>
+
+    <div id="areaBocas" class="area-bocas resultado-bocas"></div>
+    <p id="mensagemBonus" class="mensagem-bonus"></p>
+  </div>
+</section>
+
+  <section id="servicos" class="servicos">
+    <h2>Serviços</h2>
+    <div class="servico-lista">
+      <div class="servico-item">
+        <img src="img/espelho.png" alt="Noiva">
+        <h3>Maquiagem para Noivas</h3>
+        <p>Beleza única para o seu grande dia</p>
+      </div>
+      <div class="servico-item">
+        <img src="img/paleta.png" alt="Madrinha">
+        <h3>Maquiagem Madrinha/Formatura</h3>
+        <p>Impacto e sofisticação</p>
+      </div>
+      <div class="servico-item">
+        <img src="img/pincel.png" alt="Social">
+        <h3>Maquiagem Social</h3>
+        <p>Para todas ocasiões</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio" class="portfolio">
+    <h2>Portfólio</h2>
+    <img src="img/boca.png" class="icone-port" alt="Icone Galeria">
+    <div class="portfolio-imagens">
+      <div><img src="img/foto2.png" alt="Trabalho 1" /></div>
+      <div><img src="img/foto3.png" alt="Trabalho 2" /></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Vitor Makeup. Todos os direitos reservados.</p>
+  </footer>
+
+<script>
+    async function buscarBocas() {
+      const tel = document.getElementById("telefoneBusca").value.trim();
+      const bocasEl = document.getElementById("areaBocas");
+      const mensagemEl = document.getElementById("mensagemBonus");
+      bocasEl.innerHTML = "";
+      mensagemEl.textContent = "";
+
+      if (!tel) {
+        alert("Por favor, digite seu telefone.");
+        return;
+      }
+
+      try {
+        const snap = await db.collection("clientes").where("telefone", "==", tel).get();
+
+        if (snap.empty) {
+          bocasEl.innerHTML = "<p class='text-red-600'>Cliente não encontrado.</p>";
+          return;
+        }
+
+        const cliente = snap.docs[0].data();
+        const bocas = cliente.estrelas || 0;
+
+        for (let i = 1; i <= 5; i++) {
+          const img = document.createElement("img");
+          img.src = i <= bocas ? "img/bocavermelha.png" : "img/bocavazia.png";
+          img.className = "icone-boca";
+          bocasEl.appendChild(img);
+        }
+
+        if (bocas >= 5) {
+          mensagemEl.textContent = "🎉 Parabéns! Você ganhou uma Maquiagem Express!";
+          mensagemEl.classList.add("texto-bonus");
+        }
+
+      } catch (err) {
+        console.error("Erro ao buscar bocas:", err);
+        bocasEl.innerHTML = "<p class='text-red-600'>Erro ao buscar dados.</p>";
+      }
+    }
+
+    function registrarCliente(telefone, nome) {
+      const docRef = db.collection("clientes").doc(telefone);
+
+      docRef.get().then((doc) => {
+        if (!doc.exists) {
+          docRef.set({ nome, telefone, estrelas: 1 });
+        } else {
+          docRef.update({ estrelas: firebase.firestore.FieldValue.increment(1) });
+        }
+      });
+    }
+  </script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCeRbnwjdUlkoIAtsET95m00Kds7xadecA",
+      authDomain: "vitor-makeup.firebaseapp.com",
+      projectId: "vitor-makeup",
+      storageBucket: "vitor-makeup.firebasestorage.app",
+      messagingSenderId: "968145525660",
+      appId: "1:968145525660:web:915f5e605adc86d527c659",
+      measurementId: "G-67L0EMY6WS"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+ 
+    let current = 0;
+    const slides = document.querySelectorAll('.slide');
+
+    setInterval(() => {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }, 4000);
+  </script>
+</body>
+</html>

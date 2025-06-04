@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Admin</title>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-compat.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      background-color: #1c322b;
+    }
+    .btn-login {
+      background-color: #244236;
+    }
+    .btn-login:hover {
+      background-color: #1b322a;
+    }
+    .btn-voltar {
+      background-color: #75897d;
+      color: white;
+    }
+    .btn-voltar:hover {
+      background-color: #5f6e65;
+    }
+    .erro-msg {
+      color: #8e4417;
+    }
+    .titulo {
+      color: #244236;
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center h-screen">
+
+  <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-sm">
+    <h2 class="text-2xl font-bold text-center titulo mb-6">Login Admin</h2>
+    <form id="loginForm" class="space-y-4">
+      <input type="email" id="email" placeholder="E-mail" required class="w-full p-3 border rounded-xl"/>
+      <input type="password" id="senha" placeholder="Senha" required class="w-full p-3 border rounded-xl"/>
+      <button type="submit" class="w-full btn-login text-white font-semibold py-3 rounded-xl transition">
+        Entrar
+      </button>
+      <div class="text-center mt-4">
+        <a href="home.html" class="inline-block text-sm btn-voltar px-4 py-2 rounded-full transition">
+          ← Voltar para Agendamento
+        </a>
+      </div>
+      <p id="erro" class="erro-msg text-sm mt-2 text-center hidden">Erro no login</p>
+    </form>
+  </div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCeRbnwjdUlkoIAtsET95m00Kds7xadecA",
+      authDomain: "vitor-makeup.firebaseapp.com",
+      projectId: "vitor-makeup",
+      storageBucket: "vitor-makeup.firebasestorage.app",
+      messagingSenderId: "968145525660",
+      appId: "1:968145525660:web:915f5e605adc86d527c659",
+      measurementId: "G-67L0EMY6WS"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+      const senha = document.getElementById("senha").value;
+      const erro = document.getElementById("erro");
+
+      try {
+        await auth.signInWithEmailAndPassword(email, senha);
+        window.location.href = "admin.html";
+      } catch (err) {
+        console.error("Erro no login:", err.message);
+        erro.textContent = "E-mail ou senha incorretos.";
+        erro.classList.remove("hidden");
+      }
+    });
+  </script>
+</body>
+</html>
