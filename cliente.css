@@ -2,483 +2,540 @@
    Estilo Geral - Corpo da Página
    =================================================== */
 body {
-  font-family: 'Georgia', serif;
-  background: #e9f7f3 url('img/bg-bocas.png') repeat;
-  color: #6a776d;
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
+    font-family: 'Georgia', serif;
+    background: #e9f7f3 url('img/bg-bocas.png') repeat;
+    color: #6a776d;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
 
-  /* Centraliza o conteúdo vertical e horizontalmente */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    /* Centraliza o conteúdo vertical e horizontalmente */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-  /* Animação de entrada suave */
-  animation: fadeInBody 0.8s ease-in;
+    /* Animação de entrada suave */
+    animation: fadeInBody 0.8s ease-in;
 }
 
 /* Animação para o corpo */
 @keyframes fadeInBody {
-  from { opacity: 0; }
-  to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 /* ===================================================
    Cabeçalho (header)
    =================================================== */
 header {
-  width: 100%;
-  background: #244236;
-  padding: 1.5rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #e6dddd;
-  position: relative;
+    width: 100%;
+    background: #244236;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #e6dddd;
+    position: relative;
 
-  /* Animação deslizante de entrada */
-  animation: slideDown 0.6s ease-in-out;
-  box-shadow: none;
+    /* Animação deslizante de entrada */
+    animation: slideDown 0.6s ease-in-out;
+    box-shadow: none;
 }
 
 @keyframes slideDown {
-  from { transform: translateY(-20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 /* Título do header centralizado */
 header h1 {
-  margin: 0;
-  font-weight: 600;
-  font-size: 1.8rem;
-  letter-spacing: 0.05em;
-  text-align: center;
-  flex: 1; /* isso faz o título ocupar todo o espaço entre os botões */
+    margin: -50px;
+    font-weight: 600;
+    font-size: 19px;
+    letter-spacing: 0.05em;
+    text-align: center;
+    flex: 1;
+    padding-right: 0px;
+    padding-top: 0px;
+
+    /* isso faz o título ocupar todo o espaço entre os botões */
 }
 
 /* Logo posicionada à esquerda */
 header .logo {
-  position: absolute;
-  left: 2rem;
-  height: 40px;
+    position: absolute;
+    left: 2rem;
+    height: 40px;
 }
 
 /* Botões no header (perfil, logout ou ação) */
 header button,
+
 #btnPerfil,
+
 #btnLogout {
-    position: static; /* remove o absolute */
-  background: #bb6a4a;
-  color: white;
-  border: none;
-  padding: 0.6rem 1.4rem;
-  border-radius: 40px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-  position: static; /* removido absolute para facilitar layout */
-  margin-left: 1rem; /* espaçamento entre os botões */
+    position: static;
+
+    /* remove o absolute */
+    background: #bb6a4a;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.4rem;
+    border-radius: 40px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    position: static;
+
+    /* removido absolute para facilitar layout */
+    margin-left: 1rem;
+
+    /* espaçamento entre os botões */
 }
 
 header button:hover,
+
 header button:focus,
+
 #btnPerfil:hover,
+
 #btnPerfil:focus,
+
 #btnLogout:hover,
+
 #btnLogout:focus {
-  background: #6d3823;
-  outline: none;
-  transform: scale(1.05);
+    background: #6d3823;
+    outline: none;
+    transform: scale(1.05);
 }
 
 /* Container para os botões no header, alinhando à direita */
 header > div.botao-container {
-  display: flex;
-  gap: 1rem;
-  justify-content: flex-end;
-  align-items: center;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    align-items: center;
+    padding-left: 2px;
+    margin-left: -4px;
+    width: -1px;
 }
 
 /* ===================================================
    Conteúdo Principal (main)
    =================================================== */
 main {
-  max-width: 720px;
-  width: 100%;
-  padding: 3rem 2rem;
-  background-color: rgba(249, 247, 241, 0.9);
-  border-radius: 20px;
+    max-width: 720px;
+    width: 100%;
+    padding: 3rem 2rem;
+    background-color: rgba(249, 247, 241, 0.9);
+    border-radius: 20px;
 
-  /* Animação suave de aparecimento */
-  animation: fadeInMain 1s ease-in-out;
+    /* Animação suave de aparecimento */
+    animation: fadeInMain 1s ease-in-out;
 }
 
 @keyframes fadeInMain {
-  from { opacity: 0; transform: scale(0.98); }
-  to { opacity: 1; transform: scale(1); }
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 /* Botão para novo agendamento */
 #novoAgendamentoBtn {
-  display: block;
-  width: 100%;
-  max-width: 280px;
-  margin: 0 auto 3rem auto;
-  background: #244236;
-  border-radius: 35px;
-  padding: 1rem 1.8rem;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: white;
-  border: none;
-  box-shadow: 0 5px 15px rgba(76, 175, 80, 0.5);
-  cursor: pointer;
-  transition: box-shadow 0.3s ease, background 0.3s ease, transform 0.2s;
+    display: block;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto 3rem auto;
+    background: #244236;
+    border-radius: 35px;
+    padding: 1rem 1.8rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: white;
+    border: none;
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.5);
+    cursor: pointer;
+    transition: box-shadow 0.3s ease, background 0.3s ease, transform 0.2s;
 }
+
 #novoAgendamentoBtn:hover,
+
 #novoAgendamentoBtn:focus {
-  background: #388e3c;
-  box-shadow: 0 7px 18px rgba(56, 142, 60, 0.7);
-  transform: scale(1.03);
-  outline: none;
+    background: #388e3c;
+    box-shadow: 0 7px 18px rgba(56, 142, 60, 0.7);
+    transform: scale(1.03);
+    outline: none;
 }
 
 /* ===================================================
    Seções
    =================================================== */
 section {
-  margin-bottom: 3.5rem;
+    margin-bottom: 3.5rem;
 }
 
 /* Títulos das seções com fundo claro e ícones */
 section h2 {
-  background: #f9f7f1;
-  padding: 0.6rem 1rem;
-  border-radius: 12px;
-  font-weight: 600;
-  color: #1c5335;
-  margin-bottom: 1.2rem;
-  font-style: italic;
-  position: relative;
-  padding-left: 3rem; /* espaço para o ícone */
-  border: none;
+    background: #f9f7f1;
+    padding: 0.6rem 1rem;
+    border-radius: 12px;
+    font-weight: 600;
+    color: #1c5335;
+    margin-bottom: 1.2rem;
+    font-style: italic;
+    position: relative;
+    padding-left: 3rem;
+
+    /* espaço para o ícone */
+    border: none;
+    width: -1px;
 }
 
 /* Ícone para agendamentos pendentes */
 section.agendamentos-pendentes h2::before {
-  content: url('img/pincel.png');
-  position: absolute;
-  left: 0.8rem;
-  top: 0.2rem;
-  height: 20px;
+    content: url('img/pincel.png');
+    position: absolute;
+    left: 0.8rem;
+    top: 0.2rem;
+    height: 20px;
 }
 
 /* Ícone para maquiagens realizadas */
 section.maquiagens-realizadas h2::before {
-  content: url('img/paleta.png');
-  position: absolute;
-  left: 0.8rem;
-  top: 0.2rem;
-  height: 20px;
+    content: url('img/paleta.png');
+    position: absolute;
+    left: 0.8rem;
+    top: 0.2rem;
+    height: 20px;
 }
 
 /* ===================================================
    Itens de Agendamento (Pendentes e Realizados)
    =================================================== */
 .agendamento-item,
+
 .agendamento-realizado {
-  background: #f9f7f1;
-  border-radius: 20px;
-  padding: 1.3rem 1.8rem;
-  margin-bottom: 1.5rem;
+    background: #f9f7f1;
+    border-radius: 20px;
+    padding: 1.3rem 1.8rem;
+    margin-bottom: 1.5rem;
 }
 
 /* Texto dos itens */
 .agendamento-item p,
+
 .agendamento-realizado p {
-  margin: 0.4rem 0;
-  color: #6a776d;
+    margin: 0.4rem 0;
+    color: #6a776d;
 }
 
 /* Botão dentro do agendamento pendente (ex: cancelar) */
 .agendamento-item button {
-  margin-top: 0.8rem;
-  margin-right: 0.5rem;
-  padding: 0.5rem 1.1rem;
-  border: none;
-  background: #792727;
-  color: rgb(255, 255, 236);
-  font-weight: 600;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s;
+    margin-top: 0.8rem;
+    margin-right: 0.5rem;
+    padding: 0.5rem 1.1rem;
+    border: none;
+    background: #792727;
+    color: rgb(255, 255, 236);
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s;
 }
 
 .agendamento-item button:hover,
+
 .agendamento-item button:focus {
-  background: #ad3e3e;
-  transform: scale(1.05);
-  outline: none;
+    background: #ad3e3e;
+    transform: scale(1.05);
+    outline: none;
 }
 
 /* Estilo diferenciado para agendamento realizado */
 .agendamento-realizado {
-  background: #defde5;
-  border: 2px solid #28a745;
-  color: #93c99f;
+    background: #defde5;
+    border: 2px solid #28a745;
+    color: #93c99f;
 }
 
 /* ===================================================
    Modal - Janela de diálogo para ações
    =================================================== */
 .modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(74, 110, 80, 0.78);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 1500;
-  backdrop-filter: blur(5px);
+    position: fixed;
+    inset: 0;
+    background: rgba(74, 110, 80, 0.78);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1500;
+    backdrop-filter: blur(5px);
 
-  /* Animação de fade in */
-  animation: fadeInModal 0.5s ease-in-out;
+    /* Animação de fade in */
+    animation: fadeInModal 0.5s ease-in-out;
 }
 
 /* Mostra modal quando aria-hidden é false */
 .modal[aria-hidden="false"] {
-  display: flex;
+    display: flex;
 }
 
 @keyframes fadeInModal {
-  from { opacity: 0; }
-  to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 /* Conteúdo interno do modal */
 .modal-content {
-  background: #794632;
-  border-radius: 25px;
-  padding: 2rem 2.5rem;
-  width: 90%;
-  max-width: 400px;
-  color: #d5d8bf;
+    background: #794632;
+    border-radius: 25px;
+    padding: 2rem 2.5rem;
+    width: 90%;
+    max-width: 400px;
+    color: #d5d8bf;
 }
 
 /* Título dentro do modal */
 .modal-content h3 {
-  margin-top: 0;
-  margin-bottom: 1.4rem;
-  font-size: 1.6rem;
-  font-style: italic;
-  color: #d5d8bf;
+    margin-top: 0;
+    margin-bottom: 1.4rem;
+    font-size: 1.6rem;
+    font-style: italic;
+    color: #d5d8bf;
 }
 
 /* Labels dentro do modal */
 .modal-content label {
-  display: block;
-  margin-bottom: 0.35rem;
-  font-weight: 600;
-  font-style: italic;
-  color: #d5d8bf;
+    display: block;
+    margin-bottom: 0.35rem;
+    font-weight: 600;
+    font-style: italic;
+    color: #d5d8bf;
 }
 
 /* Inputs e selects dentro do modal */
 .modal-content input[type="date"],
+
 .modal-content select {
-  width: 100%;
-  padding: 0.5rem 0.6rem;
-  border-radius: 15px;
-  border: 1.5px solid #d7b8b8;
-  font-size: 1rem;
-  margin-bottom: 1.4rem;
-  font-family: 'Georgia', serif;
+    width: 100%;
+    padding: 0.5rem 0.6rem;
+    border-radius: 15px;
+    border: 1.5px solid #d7b8b8;
+    font-size: 1rem;
+    margin-bottom: 1.4rem;
+    font-family: 'Georgia', serif;
 }
 
 /* Container dos botões do modal alinhados à direita */
 .modal-buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
 }
 
 /* Botão Confirmar */
 button.confirmar {
-  background: #1f6433;
-  color: white;
-  transition: background 0.3s ease, transform 0.2s;
+    background: #1f6433;
+    color: white;
+    transition: background 0.3s ease, transform 0.2s;
 }
 
 button.confirmar:hover,
+
 button.confirmar:focus {
-  background: #259444;
-  transform: scale(1.05);
-  outline: none;
+    background: #259444;
+    transform: scale(1.05);
+    outline: none;
 }
 
 /* Botão Cancelar */
 button.cancelar {
-  background: #a14c2a;
-  color: white;
-  transition: background 0.3s ease, transform 0.2s;
+    background: #a14c2a;
+    color: white;
+    transition: background 0.3s ease, transform 0.2s;
 }
 
 button.cancelar:hover,
+
 button.cancelar:focus {
-  background: #6e3119;
-  transform: scale(1.05);
-  outline: none;
+    background: #6e3119;
+    transform: scale(1.05);
+    outline: none;
 }
 
 /* Estilo geral dos botões do modal */
 .modal-buttons button {
-  padding: 0.7rem 1.3rem;
-  border-radius: 30px;
-  font-weight: 700;
-  border: none;
-  cursor: pointer;
-  font-size: 1.05rem;
+    padding: 0.7rem 1.3rem;
+    border-radius: 30px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    font-size: 1.05rem;
 }
 
 /* ===================================================
    Popup Perfil (menu de perfil)
    =================================================== */
-
 /* Popup perfil pequeno, no canto (menu de perfil) */
 .popup-perfil {
-  display: none;
-  position: fixed;
-  top: 80px;
-  right: 20px;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  padding: 16px;
-  z-index: 999;
-  width: 250px;
+    display: none;
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    padding: 16px;
+    z-index: 999;
+    width: 250px;
 }
 
 .popup-perfil[aria-hidden="false"] {
-  display: block;
+    display: block;
 }
 
 /* ===================================================
    Popup modal grande e centralizado
    =================================================== */
 .popup-perfil-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(17, 40, 17, 0.5);
-  backdrop-filter: blur(6px);
-  display: none;
-  z-index: 1200;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(17, 40, 17, 0.5);
+    backdrop-filter: blur(6px);
+    display: none;
+    z-index: 1200;
 
-  /* Centralizar modal */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    /* Centralizar modal */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .popup-perfil-modal[aria-hidden="false"] {
-  display: flex;
+    display: flex;
 }
 
 .popup-perfil-modal .popup-conteudo {
-  background: #f0e9d2;
-  border: 2px solid #264d00;
-  border-radius: 14px;
-  padding: 2.5rem 3rem;
-  max-width: 600px;
-  width: 90%;
-  max-height: 90vh; /* evita ultrapassar altura da tela */
-  overflow-y: auto;
-  box-sizing: border-box;
-  color: #264d00;
-  font-family: 'Arial', sans-serif;
-  text-align: left;
+    background: #f0e9d2;
+    border: 2px solid #264d00;
+    border-radius: 14px;
+    padding: 2.5rem 3rem;
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
 
-  /* Animação */
-  opacity: 0;
-  transform: translateY(20px);
-  animation: slideUpFadeIn 0.4s forwards ease;
+    /* evita ultrapassar altura da tela */
+    overflow-y: auto;
+    box-sizing: border-box;
+    color: #264d00;
+    font-family: 'Arial', sans-serif;
+    text-align: left;
+
+    /* Animação */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUpFadeIn 0.4s forwards ease;
 }
 
 /* Animações */
 @keyframes slideUpFadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Títulos */
 .popup-conteudo h3 {
-  font-weight: 700;
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
-  letter-spacing: 0.04em;
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.04em;
 }
 
 /* Parágrafos */
 .popup-conteudo p {
-  font-size: 1.05rem;
-  line-height: 1.45;
-  margin-bottom: 1rem;
+    font-size: 1.05rem;
+    line-height: 1.45;
+    margin-bottom: 1rem;
 }
 
 /* Botão */
 #btnFecharPerfil {
-  background: transparent;
-  color: #264d00;
-  border: 2px solid #264d00;
-  padding: 0.5rem 1.4rem;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: all 0.35s ease;
+    background: transparent;
+    color: #264d00;
+    border: 2px solid #264d00;
+    padding: 0.5rem 1.4rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.35s ease;
 }
 
 #btnFecharPerfil:hover,
+
 #btnFecharPerfil:focus {
-  background-color: #264d00;
-  color: #f0e9d2;
-  outline: none;
+    background-color: #264d00;
+    color: #f0e9d2;
+    outline: none;
 }
 
 /* Responsividade para telas pequenas (até 480px) */
 @media (max-width: 480px) {
-  header {
-    padding: 1rem 1rem;
-  }
+    header {
+        padding: 10px;
+    }
 
-  header .logo {
-    height: 30px;
-    left: 1rem;
-  }
+    header .logo {
+        height: 30px;
+        left: 1rem;
+    }
 
-  #novoAgendamentoBtn {
-    max-width: 100%;
-  }
+    #novoAgendamentoBtn {
+        max-width: 48%;
+    }
 
-  .modal-content {
-    padding: 1.5rem 1rem;
-  }
+    .modal-content {
+        padding: 1.5rem 1rem;
+    }
 
-  .popup-perfil-modal .popup-conteudo {
-    max-width: 95%;
-    padding: 1.5rem 2rem;
-    font-size: 0.95rem;
-    max-height: 85vh;
-  }
+    .popup-perfil-modal .popup-conteudo {
+        max-width: 95%;
+        padding: 1.5rem 2rem;
+        font-size: 0.95rem;
+        max-height: 85vh;
+    }
 
-  #btnFecharPerfil {
-    width: 100%;
-    padding: 0.7rem;
-  }
+    #btnFecharPerfil {
+        width: 100%;
+        padding: 0.7rem;
+    }
 }
