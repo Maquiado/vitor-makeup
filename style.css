@@ -512,3 +512,101 @@ body {
   z-index: 2;
   position: relative;
 }
+
+
+/* Responsividade para Hero 2 */
+@media (max-width: 1024px) {
+  .hero2-text {
+    position: static;
+    padding: 40px 20px;
+    max-width: 100%;
+    text-align: center;
+    left: auto;
+    top: auto;
+  }
+
+  .hero2-text h1 {
+    font-size: 36px;
+  }
+
+  .hero2-text p {
+    font-size: 16px;
+  }
+
+  .hero2-image {
+    margin-left: 0;
+    max-width: 100%;
+    max-height: none;
+    padding: 0 20px;
+  }
+
+  .hero2-image img {
+    max-width: 280px;
+  }
+
+  .hero2 {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero2-text h1 {
+    font-size: 28px;
+  }
+
+  .hero2-text p {
+    font-size: 14px;
+  }
+
+  .btn2 {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+
+/* Responsividade para Portfolio Section */
+@media (max-width: 1024px) {
+  .portfolio-title {
+    margin-left: 0;
+    text-align: center;
+    font-size: 26px;
+  }
+
+  .orange-background {
+    position: static;
+    width: 80%;
+    height: 200px;
+    margin: 20px auto;
+    border-radius: 12px;
+  }
+
+  .portfolio-area {
+    justify-content: center;
+    gap: 20px;
+    padding: 0 10px;
+  }
+
+  .gallery {
+    max-width: 100%;
+    margin-left: 0;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .portfolio-title {
+    font-size: 22px;
+  }
+
+  .orange-background {
+    height: 150px;
+  }
+}
