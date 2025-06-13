@@ -7,7 +7,7 @@
 
 body {
   font-family: 'Playfair Display', serif;
-  background-color: #f9f7f1;
+  background-color: #0f2a1e;
   color: #244236;
   line-height: 1.6;
 }
@@ -16,7 +16,7 @@ main {
   max-width: 720px;
   width: 100%;
   padding: 3rem 2rem;
-  background-color: rgba(249, 247, 241, 0.85); /* translúcido */
+  background-color: rgba(249, 247, 241, 0.85);
   border-radius: 20px;
 }
 
@@ -59,23 +59,8 @@ nav a:hover {
   color: #e7e4c5;
 }
 
-.btn-agendar {
-  background-color: #e7e4c5;
-  color: #244236;
-  border: none;
-  border-radius: 20px;
-  padding: 0.5rem 1.2rem;
-  cursor: pointer;
-  font-weight: bold;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-}
-
-.btn-agendar:hover {
-  background-color: #dcd8b7;
-  transform: scale(1.05);
-}
-
+/* Botões - estilos compartilhados */
+.btn-agendar,
 .btn-adm {
   background-color: #e7e4c5;
   color: #244236;
@@ -88,6 +73,7 @@ nav a:hover {
   white-space: nowrap;
 }
 
+.btn-agendar:hover,
 .btn-adm:hover {
   background-color: #dcd8b7;
   transform: scale(1.05);
@@ -156,7 +142,6 @@ nav a:hover {
   animation: fadeInUp 1s ease-in-out;
 }
 
-
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -168,45 +153,12 @@ nav a:hover {
   }
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-  header.topo {
-    flex-direction: row;
-    flex-wrap: nowrap;
-    padding: 0.8rem 1.2rem;
-  }
-
-  .logo-area img {
-    height: 40px;
-  }
-
-  nav {
-    gap: 0.5rem;
-  }
-
-  .hero {
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 1rem;
-    padding: 1rem;
-  }
-
-  .hero-text {
-    font-size: 1.2rem;
-    max-width: 240px;
-  }
-
-  .hero-img-slider {
-    max-width: 200px;
-  }
-}
-
-/*Fidelidade*/
+/* Fidelidade */
 .fidelidade {
-  background-image: url('img/bg-bocas.png'); /* ajuste o caminho se necessário */
+  background-image: url('img/bg-bocas.png');
   background-repeat: repeat;
   background-size: auto;
-  background-color: #7e1b1b; /* cor de fundo de base semelhante ao vermelho da imagem */
+  background-color: #7e1b1b;
   padding: 4rem 2rem;
   color: #fef9f4;
   font-family: 'Playfair Display', serif;
@@ -287,60 +239,22 @@ nav a:hover {
   margin-top: 12px;
 }
 
-@media (max-width: 480px) {
-  .fidelidade {
-    padding: 2rem 1rem;
-  }
-
-  .fidelidade-container {
-    padding: 20px 15px;
-  }
-
-  .fidelidade-titulo {
-    font-size: 1.8rem;
-  }
-
-  .fidelidade-descricao {
-    font-size: 0.95rem;
-  }
-
-  .input-telefone {
-    width: 100%;
-  }
-
-  .fidelidade-form {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .botao-buscar {
-    width: 100%;
-  }
-
-  .area-bocas img {
-    width: 28px;
-    height: 28px;
-    margin: 3px;
-  }
-}
-
-/* Hero Section */
+/* Hero2 */
 .hero2 {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-    padding: 0px 00px;
+  padding: 0;
   justify-content: center;
   position: relative;
-  z-index: 2; /* isso garante que o hero fique acima do quadrado */
+  z-index: 2;
 }
-
 
 .hero2-text {
   flex: 1;
   padding: 70px 100px;
   max-width: 400px;
-    position: absolute;
+  position: absolute;
   top: 10px;
   left: 600px;
 }
@@ -349,14 +263,12 @@ nav a:hover {
   font-size: 48px;
   line-height: 1.2;
   color: #f3ead2;
-  
 }
 
 .hero2-text p {
   margin: 20px 0;
   font-size: 18px;
   color: #e0d7c2;
-  
 }
 
 .btn2 {
@@ -376,37 +288,33 @@ nav a:hover {
   justify-content: center;
   overflow: hidden;
   max-height: 100vh;
-  margin-left: 400px; /* aumenta o espaço entre texto e imagem */
-  
+  margin-left: 400px;
 }
 
 .hero2-image img {
-  width: 40%;
+  width: 100%;
   height: auto;
-  max-width: 150px;
+  max-width: 350px;
   object-fit: cover;
   display: block;
-  
 }
 
-/* Portfolio Section */
 /* Portfolio Section */
 .portfolio-section {
   position: relative;
   background-color: #0f2a1e;
   padding: 40px 5px;
   color: #f3ead2;
-  margin-top: -20px; /* sobrepõe o hero */
+  margin-top: -20px;
   z-index: 0;
 }
 
 .portfolio-title {
   font-size: 30px;
   margin-bottom: 20px;
-   margin-left: 800px; /* ajusta o valor para mover mais ou menos */
-  z-index: 2;
-  
+  margin-left: 800px;
   position: relative;
+  z-index: 2;
 }
 
 .portfolio-area {
@@ -419,10 +327,10 @@ nav a:hover {
 .orange-background {
   position: absolute;
   background-color: #8c3c1e;
-  top: -200px;             /* sobe o quadrado */
-  left: 32%;              /* desloca para a direita */
+  top: -200px;
+  left: 32%;
   width: 30%;
-  height: 400px;          /* altura reduzida */
+  height: 400px;
   z-index: 0;
   border-radius: 8px;
 }
@@ -435,15 +343,14 @@ nav a:hover {
   z-index: 1;
   width: 100%;
   max-width: 600px;
-    margin-left: 150px;
+  margin-left: 150px;
 }
 
 .gallery img {
   width: 100%;
-      aspect-ratio: 1 / 1; /* força imagem quadrada */
-      object-fit: cover; /* garante que preencha sem deformar */
-  border-radius: 4px;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
+  border-radius: 4px;
 }
 
 /* Testimonials */
@@ -451,8 +358,7 @@ nav a:hover {
   background-color: #f3ead2;
   color: #0f2a1e;
   padding: 40px 20px;
-  text-align: left;
-    text-align: center;
+  text-align: center;
 }
 
 .testimonials h2 {
@@ -465,18 +371,7 @@ nav a:hover {
   font-style: italic;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #0f2a1e;
-  color: #f3ead2;
-}
-
+/* Lightbox */
 .lightbox {
   position: fixed;
   top: 0;
@@ -513,141 +408,99 @@ body {
   position: relative;
 }
 
+/* Responsividade - DETALHADA e organizada */
 
-/* Responsividade para Hero 2 */
+/* === Header e Navbar responsivos === */
+/* === Hero 2 responsivo médio (tablet/laptop) === */
 @media (max-width: 1024px) {
   .hero2 {
+    display: flex;
     flex-wrap: nowrap;
+    flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     padding: 10px 20px;
+    gap: 20px;
   }
 
   .hero2-text {
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    max-width: 40%;
-    padding: 30px 15px;
+    position: static;
+    max-width: 50%;
+    padding: 20px;
     text-align: left;
   }
 
-  .hero2-text h1 {
-    font-size: 28px;
-    line-height: 1.3;
-  }
-
-  .hero2-text p {
-    font-size: 14px;
-    margin: 15px 0;
-  }
-
-  .btn2 {
-    padding: 10px 18px;
-    font-size: 14px;
-  }
-
   .hero2-image {
-    margin-left: 0;
+    margin: 0;
     max-width: 50%;
-    max-height: none;
   }
 
   .hero2-image img {
-    max-width: 100%;
+    width: 100%;
     height: auto;
-    max-height: 320px;
-  }
-}
-
-@media (max-width: 600px) {
-  .hero2-text {
-    max-width: 55%;
-    padding: 20px 12px;
-    top: 10px;
-    right: 10px;
+    object-fit: cover;
   }
 
-  .hero2-text h1 {
-    font-size: 22px;
-  }
-
-  .hero2-text p {
-    font-size: 13px;
-  }
-
-  .btn2 {
-    padding: 8px 16px;
-    font-size: 13px;
-  }
-
-  .hero2-image {
-    max-width: 40%;
-  }
-
-  .hero2-image img {
-    max-height: 240px;
-  }
-}
-
-
-@media (max-width: 1024px) {
   .portfolio-title {
-    font-size: 24px;
-    margin-left: 400px; /* menor deslocamento que 800px */
-  }
-
-  .portfolio-area {
-    justify-content: flex-start; /* alinha mais à esquerda */
-    padding: 0 20px;
-  }
-
-  .orange-background {
-    top: -150px;
-    left: 20%;
-    width: 40%;
-    height: 300px;
-  }
-
-  .gallery {
-    max-width: 480px;
-    margin-left: 80px;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-
-  .gallery img {
-    border-radius: 6px;
-  }
-}
-
-@media (max-width: 600px) {
-  .portfolio-title {
-    font-size: 20px;
-    margin-left: 0;
+    margin: 40px auto 20px;
     text-align: center;
   }
 
-  .portfolio-area {
-    justify-content: center;
-    padding: 0 10px;
-  }
-
-  .orange-background {
-    top: -100px;
-    left: 10%;
-    width: 80%;
-    height: 200px;
-    border-radius: 6px;
-  }
-
   .gallery {
-    max-width: 320px;
-    margin-left: 0;
-    grid-template-columns: 1fr;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px;
+    justify-items: center;
+    padding: 0 20px;
+    margin: 0 auto;
+  }
+}
+
+/* === Hero 2 e Portfolio para celular (mantendo layout de desktop) === */
+@media (max-width: 600px) {
+  .hero2 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px;
     gap: 10px;
   }
 
-  .gallery img {
-    border-radius: 4px;
+  .hero2-text {
+    position: static;
+    max-width: 50%;
+    padding: 10px;
+    text-align: left;
+  }
+
+  .hero2-image {
+    max-width: 50%;
+    margin: 0;
+  }
+
+  .hero2-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .portfolio-title {
+    text-align: center;
+    margin: 30px auto 10px;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 8px;
+    justify-items: center;
+    padding: 0 15px;
+    margin: 0 auto;
+  }
+
+  .orange-background {
+    display: block; /* ou 'none' se quiser esconder no celular */
   }
 }
