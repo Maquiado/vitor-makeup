@@ -516,17 +516,24 @@ body {
 
 /* Responsividade para Hero 2 */
 @media (max-width: 1024px) {
+  .hero2 {
+    flex-wrap: nowrap;       /* mantém os itens em linha */
+    justify-content: space-between;  /* espaço entre texto e imagem */
+    padding: 20px 40px;
+  }
+
   .hero2-text {
-    position: static;
+    position: absolute;      /* mantém posição absoluta */
+    left: auto;              /* remove o valor fixo */
+    right: 20px;             /* posiciona na direita com margem */
+    top: 20px;
+    max-width: 45%;          /* texto ocupa menos espaço */
     padding: 40px 20px;
-    max-width: 100%;
-    text-align: center;
-    left: auto;
-    top: auto;
+    text-align: left;
   }
 
   .hero2-text h1 {
-    font-size: 36px;
+    font-size: 32px;
   }
 
   .hero2-text p {
@@ -535,25 +542,26 @@ body {
 
   .hero2-image {
     margin-left: 0;
-    max-width: 100%;
+    max-width: 50%;
     max-height: none;
-    padding: 0 20px;
   }
 
   .hero2-image img {
-    max-width: 280px;
-  }
-
-  .hero2 {
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px 10px;
+    max-width: 100%;
+    height: auto;
   }
 }
 
 @media (max-width: 600px) {
+  .hero2-text {
+    max-width: 55%;
+    padding: 20px 10px;
+    top: 10px;
+    right: 10px;
+  }
+
   .hero2-text h1 {
-    font-size: 28px;
+    font-size: 26px;
   }
 
   .hero2-text p {
@@ -561,52 +569,11 @@ body {
   }
 
   .btn2 {
-    padding: 10px 20px;
+    padding: 10px 16px;
     font-size: 14px;
   }
-}
 
-/* Responsividade para Portfolio Section */
-@media (max-width: 1024px) {
-  .portfolio-title {
-    margin-left: 0;
-    text-align: center;
-    font-size: 26px;
-  }
-
-  .orange-background {
-    position: static;
-    width: 80%;
-    height: 200px;
-    margin: 20px auto;
-    border-radius: 12px;
-  }
-
-  .portfolio-area {
-    justify-content: center;
-    gap: 20px;
-    padding: 0 10px;
-  }
-
-  .gallery {
-    max-width: 100%;
-    margin-left: 0;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-}
-
-@media (max-width: 600px) {
-  .gallery {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .portfolio-title {
-    font-size: 22px;
-  }
-
-  .orange-background {
-    height: 150px;
+  .hero2-image {
+    max-width: 40%;
   }
 }
