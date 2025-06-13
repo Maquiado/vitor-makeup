@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel de Disponibilidade</title>
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+  <style>
+    #calendar {
+      max-width: 900px;
+      margin: 40px auto;
+    }
+    .fc-daygrid-day.has-disponibilidade {
+      background-color: #d4edda !important;
+    }
+    #controle {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    #horariosDisponiveis label {
+      display: inline-block;
+      width: 80px;
+      margin: 5px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #244236;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .has-disponibilidade {
+      background-color: #d4edda !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="calendar"></div>
+
+  <div id="controle" style="display:none">
+    <h3>Disponibilidade para <span id="dataSelecionada"></span></h3>
+    <form id="formHorarios">
+      <div id="horariosDisponiveis"></div>
+      <button type="submit">Salvar Disponibilidade</button>
+    </form>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+
+  <!-- FullCalendar -->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCeRbnwjdUlkoIAtsET95m00Kds7xadecA",
+      authDomain: "vitor-makeup.firebaseapp.com",
+      projectId: "vitor-makeup",
+      storageBucket: "vitor-makeup.appspot.com",
+      messagingSenderId: "968145525660",
+      appId: "1:968145525660:web:915f5e605adc86d527c659"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    document.addEventListener('DOMContentLoaded', async function () {
+      const calendarEl = document.getElementById('calendar');
+      const controle = document.getElementById('controle');
+      const dataSelecionadaEl = document.getElementById('dataSelecionada');
+      const horariosDiv = document.getElementById('horariosDisponiveis');
+      const formHorarios = document.getElementById('formHorarios');
+
+      const horarios = [];
+      for (let h = 8; h <= 21; h++) {
+        const horaStr = (h < 10 ? '0' : '') + h + ':00';
+        horarios.push(horaStr);
+      }
+
+      let diasComDisponibilidade = new Set();
+
+      async function carregarDiasDisponiveis() {
+        const snapshot = await db.collection("disponibilidade").get();
+        diasComDisponibilidade = new Set(
+          snapshot.docs.filter(doc => {
+            const data = doc.data();
+            return Array.isArray(data.horarios) && data.horarios.length > 0;
+          }).map(doc => doc.id)
+        );
+      }
+
+      const calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        locale: 'pt-br',
+        selectable: true,
+        dateClick: async function (info) {
+          const data = info.dateStr;
+          dataSelecionadaEl.textContent = data;
+          controle.style.display = 'block';
+          horariosDiv.innerHTML = '';
+
+          const docRef = await db.collection("disponibilidade").doc(data).get();
+          const horariosSalvos = (docRef.exists && Array.isArray(docRef.data().horarios)) ? docRef.data().horarios : [];
+
+          horarios.forEach(hora => {
+            const label = document.createElement('label');
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.value = hora;
+            checkbox.name = 'horarios';
+            if (horariosSalvos.includes(hora)) checkbox.checked = true;
+            label.appendChild(checkbox);
+            label.appendChild(document.createTextNode(' ' + hora));
+            horariosDiv.appendChild(label);
+          });
+
+formHorarios.onsubmit = async (e) => {
+  e.preventDefault();
+  const selecionados = [...formHorarios.elements['horarios']]
+    .filter(c => c.checked)
+    .map(c => c.value);
+
+  if (selecionados.length > 0) {
+    await db.collection("disponibilidade").doc(data).set({
+      data: data,
+      horarios: selecionados
+    });
+  } else {
+    await db.collection("disponibilidade").doc(data).delete();
+  }
+
+  alert("Disponibilidade atualizada!");
+
+  calendar.destroy();
+  await carregarDiasDisponiveis();
+  calendar.render();
+};
+        },
+        dayCellDidMount: function (info) {
+          const data = info.date.toISOString().split('T')[0];
+          if (diasComDisponibilidade.has(data)) {
+            info.el.classList.add('has-disponibilidade');
+          }
+        }
+      });
+
+      await carregarDiasDisponiveis();
+      calendar.render();
+    });
+  </script>
+</body>
+</html>

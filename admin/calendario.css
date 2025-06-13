@@ -1,0 +1,310 @@
+/* Reset e base */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f9f9f9;
+}
+
+/* Sidebar fixa */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 220px;
+  background-color: #3f3f46;
+  padding-top: 20px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.sidebar button {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  color: white;
+  text-align: left;
+  padding: 15px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-left: 4px solid transparent;
+  transition: background-color 0.3s ease, border-left-color 0.3s ease;
+}
+
+.sidebar button:hover {
+  background-color: #52525b;
+  border-left: 4px solid #a855f7;
+}
+
+/* Content principal */
+.content {
+  margin-left: 220px;
+  padding: 40px;
+  background: white;
+  min-height: 100vh;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  max-width: calc(100% - 260px);
+  transition: max-width 0.3s ease;
+}
+
+.content h1 {
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #333;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  user-select: none;
+}
+
+/* Container do calendário: limita tamanho e centraliza */
+#calendar-container {
+  max-width: 360px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fefefe;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+#calendar-container:hover {
+  box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+}
+
+/* FullCalendar estilos pequenos e compactos */
+.fc {
+  font-size: 14px;
+  --fc-border-color: #ddd;
+  --fc-daygrid-event-dot-width: 8px;
+}
+
+/* Cabeçalho do calendário */
+.fc-toolbar-title {
+  font-weight: 700;
+  font-size: 1.2em;
+  color: #4f46e5; /* roxo suave */
+  user-select: none;
+}
+
+/* Botões do toolbar */
+.fc-toolbar button {
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.25s ease;
+  box-shadow: 0 2px 6px rgba(79,70,229,0.4);
+}
+
+.fc-toolbar button:hover {
+  background-color: #4338ca;
+  box-shadow: 0 3px 8px rgba(67,56,202,0.6);
+}
+
+/* Dias do mês */
+.fc-daygrid-day {
+  border: 1px solid var(--fc-border-color);
+  border-radius: 6px;
+  transition: background-color 0.3s ease, transform 0.15s ease;
+}
+
+/* Hover nos dias */
+.fc-daygrid-day:hover {
+  background-color: #ede9fe;
+  transform: scale(1.05);
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: 0 4px 10px rgba(79,70,229,0.15);
+}
+
+/* Dia atual */
+.fc-day-today {
+  background-color: #ede9fe;
+  font-weight: 700;
+  color: #4f46e5;
+  border: 2px solid #4f46e5;
+}
+
+/* Eventos pequenos */
+.fc-event {
+  font-size: 12px;
+  border-radius: 6px;
+  padding: 2px 6px;
+  background-color: #a78bfa;
+  border: none;
+  box-shadow: 0 2px 8px rgba(167,139,250,0.6);
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+.fc-event:hover {
+  background-color: #7c3aed;
+  box-shadow: 0 4px 14px rgba(124,58,237,0.8);
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+  .content {
+    margin-left: 0;
+    max-width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 20px 15px;
+  }
+  #calendar-container {
+    max-width: 100%;
+    padding: 15px;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar button {
+    text-align: center;
+  }
+}
+
+/* Transições gerais */
+#calendar-container,
+.fc-daygrid-day,
+.fc-event,
+.fc-toolbar button {
+  transition: all 0.3s ease;
+}
+/* Dia com disponibilidade destacado */
+.fc-daygrid-day.has-disponibilidade {
+  background-color: #d1fae5; /* verde claro */
+  border-color: #10b981; /* verde */
+  color: #065f46; /* verde escuro */
+  font-weight: 600;
+}
+
+.fc-daygrid-day.has-disponibilidade:hover {
+  background-color: #a7f3d0;
+  box-shadow: 0 4px 10px rgba(16,185,129,0.3);
+  transform: scale(1.07);
+  z-index: 3;
+}
+
+.fc-daygrid-day.data-selecionada {
+  background-color: #4f46e5 !important; /* azul roxo */
+  color: white !important;
+  font-weight: 700;
+  box-shadow: 0 0 8px rgba(79,70,229,0.8);
+}
+
+#horariosDisponiveis {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+#horariosDisponiveis label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  background-color: #e0e7ff; /* lilás clarinho */
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  font-weight: 600;
+  color: #4338ca; /* roxo escuro */
+  box-shadow: 0 2px 6px rgba(67,56,202,0.3);
+}
+
+#horariosDisponiveis label:hover {
+  background-color: #c7d2fe;
+  box-shadow: 0 4px 10px rgba(67,56,202,0.5);
+}
+
+#horariosDisponiveis input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #4338ca;
+  border-radius: 6px;
+  margin-right: 8px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+#horariosDisponiveis input[type="checkbox"]:checked {
+  background-color: #4338ca;
+  border-color: #4338ca;
+}
+
+#horariosDisponiveis input[type="checkbox"]:checked::after {
+  content: "✓";
+  color: white;
+  font-weight: bold;
+  position: absolute;
+  top: 0;
+  left: 3px;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+/* Botão Abrir Agenda */
+#abrirAgendaBtn {
+  background-color: #4f46e5; /* roxo */
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(79,70,229,0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#abrirAgendaBtn:hover {
+  background-color: #4338ca; /* roxo mais escuro */
+  box-shadow: 0 6px 25px rgba(67,56,202,0.6);
+}
+
+/* Botão Salvar Disponibilidade */
+#formHorarios button[type="submit"] {
+  background-color: #16a34a; /* verde escuro */
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(22,163,74,0.5);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#formHorarios button[type="submit"]:hover {
+  background-color: #15803d; /* verde mais escuro */
+  box-shadow: 0 6px 25px rgba(21,128,61,0.7);
+}
+
+.fc-day-past {
+  background-color: #f0f0f0 !important;
+  color: #aaa !important;
+  cursor: default !important;
+  pointer-events: none; /* desativa clique */
+}

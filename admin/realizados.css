@@ -1,0 +1,136 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f9f9f9;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 220px;
+  background-color: #3f3f46;
+  padding-top: 20px;
+  color: white;
+}
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.sidebar button {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  color: white;
+  text-align: left;
+  padding: 15px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-left: 4px solid transparent;
+}
+
+.sidebar button:hover {
+  background-color: #52525b;
+  border-left: 4px solid #a855f7;
+}
+
+.content {
+  margin-left: 220px;
+  padding: 40px;
+}
+
+.content h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 600px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .content {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .sidebar button {
+    text-align: center;
+  }
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.card {
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  padding: 16px;
+  width: 280px;
+  transition: box-shadow 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.card h3 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.card p {
+  margin: 4px 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.card .valor {
+  font-weight: bold;
+  color: #2a9d8f;
+  margin-top: 12px;
+  font-size: 1.1rem;
+}
+
+.btn-realizado {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #2a9d8f;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-realizado:hover {
+  background-color: #1e6f72;
+}
+
+/* Novo estilo para cards realizados */
+.card.card-realizado {
+  background-color: #e6f4ea; /* verde claro */
+  border-left: 6px solid #2a9d8f;
+}
+
+.content {
+  margin-left: 220px; /* mesmo valor do width da sidebar */
+  padding: 40px;
+}

@@ -1,0 +1,135 @@
+    
+      body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9f9f9;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 220px;
+      background-color: #3f3f46;
+      padding-top: 20px;
+      color: white;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .sidebar button {
+      display: block;
+      width: 100%;
+      background: none;
+      border: none;
+      color: white;
+      text-align: left;
+      padding: 15px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-left: 4px solid transparent;
+    }
+
+    .sidebar button:hover {
+      background-color: #52525b;
+      border-left: 4px solid #a855f7;
+    }
+
+    .content {
+      margin-left: 220px;
+      padding: 40px;
+    }
+
+    .content h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+
+      .content {
+        margin-left: 0;
+        padding: 20px;
+      }
+
+      .sidebar button {
+        text-align: center;
+      }
+    }
+    /* Modal base, reuse se quiser */
+    .modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 6px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+
+    .modal-close {
+      float: right;
+      cursor: pointer;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    #lista-promocoes {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .promocao-item {
+      background: white;
+      padding: 15px;
+      border-radius: 6px;
+      box-shadow: 0 0 6px rgba(0,0,0,0.1);
+      flex: 1 1 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .promocao-info {
+      margin-bottom: 10px;
+    }
+
+    .promocao-info h3 {
+      margin: 0 0 8px 0;
+    }
+
+    .promocao-acoes button {
+      margin-right: 8px;
+      cursor: pointer;
+      background: #a855f7;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      color: white;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+    .promocao-acoes button:hover {
+      background: #7e22ce;
+    }

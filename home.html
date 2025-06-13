@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vitor Makeup</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Firebase compat -->
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+</head>
+  <style>
+    .hero-text h1 {
+      color: #244236;
+    }
+  </style>
+<body>
+  <header class="topo">
+    <div class="logo-area">
+      <img src="img/logo2.png" alt="Vitor Makeup Logo" />
+    </div>
+    <nav>
+      <a href="#sobre">Sobre</a>
+      <a href="#portfolio">Portfolio</a>
+  <a href="cadastro.html">Cadastro</a>
+      <a href="logincliente.html" class="btn-adm">Login</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-img-slider">
+      <img src="img/foto1.png" alt="Makeup 1" class="slide active" />
+      <img src="img/foto2.png" alt="Makeup 2" class="slide" />
+      <img src="img/foto3.png" alt="Makeup 3" class="slide" />
+    </div>
+    <div class="hero-text">
+      <h1>Realce sua beleza com técnica e durabilidade</h1>
+     <button class="btn-agendar" onclick="window.location.href='logincliente.html'">
+  AGENDAR HORARIO
+</button>
+    </div>
+  </section>
+
+<section class="fidelidade">
+  <div class="fidelidade-container">
+    <h2 class="fidelidade-titulo">Programa de Fidelidade</h2>
+    <p class="fidelidade-descricao">
+      A cada maquiagem, uma boca.<br />
+      Com 5, ganhe uma maquiagem exclusiva.
+    </p>
+
+    <div class="fidelidade-form">
+      <input
+        id="telefoneBusca"
+        type="text"
+        placeholder="Digite seu WhatsApp"
+        class="input-telefone"
+      />
+      <button onclick="buscarBocas()" class="botao-buscar">
+        Ver Minhas Bocas
+      </button>
+    </div>
+
+    <div id="areaBocas" class="area-bocas resultado-bocas"></div>
+    <p id="mensagemBonus" class="mensagem-bonus"></p>
+  </div>
+</section>
+  <div class="hero2">
+    <div class="hero2-text">
+      <h1>BELEZA<br>APRIMORADA</h1>
+      <p>Realçando sua beleza natural com maquiagem profissional</p>
+    </div>
+    <div class="hero2-image">
+      <img src="img/hero.jpg" alt="Imagem Principal">
+    </div>
+  </div>
+
+<section class="portfolio-section" id="portfolio">
+  <h2 class="portfolio-title">MEU TRABALHO</h2>
+<p class="legenda-expansao">Clique na imagem para expandir</p>
+  <div class="portfolio-area">
+    <div class="orange-background"></div>
+    <div class="gallery">
+      <img src="img/img1.jpg" alt="Trabalho 1">
+      <img src="img/img2.jpg" alt="Trabalho 2">
+      <img src="img/img3.jpg" alt="Trabalho 3">
+      <img src="img/img4.jpg" alt="Trabalho 4">
+    </div>
+  </div>
+</section>
+<!-- Modal para imagem expandida -->
+<div id="lightbox" class="lightbox" onclick="fecharLightbox()">
+  <img id="lightbox-img" src="" alt="Imagem expandida" />
+</div>
+
+  <section class="testimonials">
+    <h2>DEPOIMENTOS DE CLIENTES</h2>
+    <p>"Estou muito feliz com minha maquiagem! Foi exatamente o que eu queria e durou a noite toda."</p>
+  </section>
+
+<script src="script.js"></script>
+<script src="firebase.js"></script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+/* Mantém sua paleta original */
+body {
+  background-color: #f9f5ec;
+  color: #244236;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container adaptável */
+.container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.bg-verde-escuro { background-color: #244236; }
+.bg-verde-escuro:hover { background-color: #1c322b; }
+
+.bg-verde-claro { background-color: #e7e4c5; color: #244236; }
+.bg-verde-claro:hover { background-color: #d3cfb2; }
+
+.bg-laranja-escuro { background-color: #8e4417; }
+.bg-laranja-escuro:hover { background-color: #723612; }
+
+.text-verde-escuro { color: #244236; }
+
+/* FullCalendar */
+#calendar {
+  max-width: 100%;
+  margin: 40px auto;
+  background: white;
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+
+.fc-toolbar {
+  flex-wrap: wrap !important;
+  justify-content: space-between !important;
+  gap: 8px;
+}
+
+.fc-toolbar-title {
+  font-size: 1.6rem;
+  color: #244236;
+}
+
+.fc-button {
+  background-color: #75897d !important;
+  border: none !important;
+  color: white !important;
+  font-weight: 500;
+  border-radius: 6px !important;
+  padding: 6px 12px !important;
+}
+.fc-button:hover {
+  background-color: #5f6e65 !important;
+}
+
+.fc-daygrid-day.has-disponibilidade {
+  background-color: #d8f3dc !important;
+  position: relative;
+}
+.fc-daygrid-day.has-disponibilidade::after {
+  display: none; /* remove o ícone ✔ */
+}
+
+.fc-day-today {
+  background-color: #fff8dc !important;
+  border: 2px solid #8e4417 !important;
+}
+
+.fc-event {
+  background-color: #244236 !important;
+  border: 1px solid #75897d !important;
+  color: #fff !important;
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 14px;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+}
+.fc-event:hover {
+  background-color: #1c322b !important;
+  transform: scale(1.03);
+  transition: all 0.2s ease;
+}
+
+/* Botões */
+button {
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border-radius: 6px;
+}
+button:hover {
+  transform: scale(1.05);
+}
+
+#toast {
+  background-color: #75897d;
+  color: white;
+  font-weight: 500;
+}
+
+#modalEditar {
+  backdrop-filter: blur(4px);
+}
+
+/* Painel de controle */
+#controle {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+/* Checkbox de horários */
+#horariosDisponiveis label {
+  display: inline-block;
+  background-color: #e7e4c5;
+  color: #244236;
+  padding: 8px 12px;
+  margin: 5px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.selected-day {
+  background-color: #2c3c6f !important;
+  color: #fff !important;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #e7e4c5;
+}
+
+.data-selecionada {
+  background-color: #8e4417 !important;
+  color: white !important;
+  border-radius: 50%;
+}
+
+/* ======= Responsivo ======= */
+@media (max-width: 768px) {
+  #calendar {
+    margin: 20px 10px;
+    padding: 8px;
+  }
+
+  .fc-toolbar-title {
+    font-size: 1.3rem;
+    text-align: center;
+    width: 100%;
+  }
+
+  .fc-button {
+    font-size: 0.85rem !important;
+    padding: 4px 8px !important;
+  }
+
+  #controle {
+    padding: 15px;
+    margin: 10px;
+  }
+
+  #horariosDisponiveis label {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+    margin: 4px;
+  }
+
+  .fc-event {
+    font-size: 12px;
+    padding: 4px 6px;
+  }
+
+  .fc-daygrid-day-number {
+    font-size: 0.85rem;
+  }
+
+  .container {
+    padding: 0.5rem;
+  }
+
+  .flex {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .fc-toolbar-title {
+    font-size: 1.1rem;
+  }
+
+  .fc-button {
+    font-size: 0.75rem !important;
+    padding: 3px 6px !important;
+  }
+
+  #controle {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  #horariosDisponiveis label {
+    padding: 5px 8px;
+    font-size: 0.8rem;
+  }
+}
+
+
+.filtro-btn {
+  background-color: #244236;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.filtro-btn:hover {
+  background-color: #2e5a47;
+}
+
+.filtro-btn.ativo {
+  background-color: #2c3c6f;
+}
+
+.bg-cinza-claro {
+  background-color: #d1d5db; /* cinza claro */
+}
+
+.bg-verde-claro {
+  background-color: #c8e6c9; /* verde suave */
+}
+
+.bg-amarelo-claro {
+  background-color: #fff9c4; /* amarelo suave */
+}

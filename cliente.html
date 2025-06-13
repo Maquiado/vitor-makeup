@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Painel do Cliente</title>
+<link rel="stylesheet" href="cliente.css" />
+</head>
+<body>
+
+<header>
+  <h1>Painel do Cliente</h1>
+  <div class="botao-container">
+    <button type="button" aria-label="Perfil" id="btnPerfil">Perfil</button>
+    <button type="button" aria-label="Sair do painel" id="btnLogout">Sair</button>
+  </div>
+</header>
+
+<main>
+  <button id="novoAgendamentoBtn" type="button" aria-label="Marcar novo agendamento">
+    Marcar Novo Agendamento
+  </button>
+
+  <section aria-labelledby="tituloPendentes" tabindex="-1">
+    <h2 id="tituloPendentes">Agendamentos Pendentes</h2>
+    <div id="listaClienteAgendamentos" role="list" aria-live="polite" aria-busy="true">
+      <p>Carregando agendamentos...</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="tituloRealizados" tabindex="-1">
+    <h2 id="tituloRealizados">Maquiagens Realizadas</h2>
+    <div id="listaMaquiagensRealizadas" role="list" aria-live="polite" aria-busy="true">
+      <p>Carregando maquiagens realizadas...</p>
+    </div>
+  </section>
+</main>
+<div id="popupPerfil" class="popup-perfil" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="popup-conteudo">
+    <h3>Informações da Cliente</h3>
+    <p><strong>Nome:</strong> <span id="perfilNome"></span></p>
+    <p><strong>Email:</strong> <span id="perfilEmail"></span></p>
+    <p><strong>Telefone:</strong> <span id="perfilTelefone"></span></p>
+    <p><strong>Nascimento:</strong> <span id="perfilNascimento"></span></p>
+    <button id="btnFecharPerfil">Fechar</button>
+  </div>
+</div>
+<!-- Modal para alterar horário -->
+<div id="modalAlterarHorario" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitulo" aria-hidden="true">
+  <div class="modal-content">
+    <h3 id="modalTitulo">Alterar Horário</h3>
+    <form id="formAlterarHorario">
+      <input type="hidden" id="agendamentoId" />
+      <label for="novaData">Nova Data:</label>
+      <input type="date" id="novaData" name="novaData" required aria-required="true" />
+      <label for="novaHora">Novo Horário:</label>
+      <select id="novaHora" name="novaHora" required aria-required="true" aria-describedby="descricaoHorarios">
+        <option value="">Selecione o horário</option>
+      </select>
+      <p id="descricaoHorarios" class="sr-only">Selecione um horário disponível para a nova data.</p>
+
+      <div class="modal-buttons">
+        <button type="submit" class="confirmar">Confirmar Alteração</button>
+        <button type="button" class="cancelar" id="btnCancelarModal">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+
+<script src="cliente.js"></script>
+
+</body>
+</html>

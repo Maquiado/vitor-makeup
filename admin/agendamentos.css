@@ -1,0 +1,256 @@
+  body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9f9f9;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 220px;
+      background-color: #3f3f46;
+      padding-top: 20px;
+      color: white;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .sidebar button {
+      display: block;
+      width: 100%;
+      background: none;
+      border: none;
+      color: white;
+      text-align: left;
+      padding: 15px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-left: 4px solid transparent;
+    }
+
+    .sidebar button:hover {
+      background-color: #52525b;
+      border-left: 4px solid #a855f7;
+    }
+
+    .content {
+      margin-left: 220px;
+      padding: 40px;
+    }
+
+    .content h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+
+      .content {
+        margin-left: 0;
+        padding: 20px;
+      }
+
+      .sidebar button {
+        text-align: center;
+      }
+    }
+
+
+    /* agendamentos.css */
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.card {
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  padding: 16px;
+  width: 280px;
+  transition: box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.card h3 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.card p {
+  margin: 4px 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.card .valor {
+  font-weight: bold;
+  color: #2a9d8f;
+  margin-top: 12px;
+  font-size: 1.1rem;
+}
+
+
+/* Modal */
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 8px;
+  padding: 24px;
+  width: 320px;
+  max-width: 90%;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #555;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: #000;
+}
+
+#modal-body p {
+  margin: 8px 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Modal form */
+#form-agendamento label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+}
+
+#form-agendamento input,
+#form-agendamento select {
+  width: 100%;
+  padding: 6px 8px;
+  margin-top: 4px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+#form-agendamento button {
+  background-color: #2a9d8f;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+#form-agendamento button:hover {
+  background-color: #21867a;
+}
+
+#btn-excluir {
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+#btn-excluir:hover {
+  background-color: #b73036;
+}
+
+
+
+.card {
+  position: relative;
+  /* outros estilos */
+}
+
+.btn-realizado {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #2a9d8f;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-realizado:hover {
+  background-color: #1e6f72;
+}
+
+.filters {
+  margin-bottom: 20px;
+}
+
+.filters label {
+  font-weight: 600;
+  color: #333;
+  font-size: 1rem;
+}
+
+.filters input {
+  margin-left: 8px;
+  padding: 4px 8px;
+  font-size: 1rem;
+}
+
+#btn-limpar-filtro {
+  background-color: #e63946;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#btn-limpar-filtro:hover {
+  background-color: #b73036;
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Clientes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="clientes.css" />
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+  <script src="firebase.js"></script>
+  <script src="auth.js"></script>
+  <script src="clientes.js" defer></script>
+</head>
+<body>
+
+  <div class="sidebar">
+    <h2>👑 Vitor Makeup</h2>
+<button onclick="window.location.href='calendario.html'">📅 Calendário</button>            <!-- já ótimo! -->
+<button onclick="window.location.href='agendamentos.html'">🗓️ Agendamentos</button>         <!-- calendário com folha -->
+<button onclick="window.location.href='realizados.html'">✔️ Realizados</button>             <!-- check simples -->
+<button onclick="window.location.href='clientes.html'">👥 Clientes</button>                <!-- ótimo, pessoas -->
+<button onclick="window.location.href='servicos.html'">💄 Serviços</button>               <!-- ótimo -->
+<button onclick="window.location.href='dashboard.html'">📊 Dashboard</button>             <!-- gráfico de barras -->
+    <button onclick="logout()">🚪 Sair</button>
+  </div>
+
+  <div class="content">
+    <h1>Lista de Clientes</h1>
+    <input
+      type="text"
+      id="filtro-texto"
+      placeholder="Pesquisar por nome, email ou telefone..."
+      autocomplete="off"
+    />
+
+    <div id="clientes-lista" class="lista-clientes"></div>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal-cliente" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span id="modal-close" class="modal-close">&times;</span>
+
+    <div id="view-info">
+      <h2 id="cliente-nome"></h2>
+      <p><strong>Email:</strong> <span id="cliente-email"></span></p>
+      <p><strong>Telefone:</strong> <span id="cliente-telefone"></span></p>
+      <p><strong>Idade:</strong> <span id="cliente-idade"></span> anos</p>
+
+      <button id="btn-editar">Editar</button>
+      <button id="btn-excluir" style="background-color:#b73036; color:white;">Excluir</button>
+    </div>
+
+    <form id="form-editar" style="display:none; margin-top:20px;">
+      <label for="edit-nome">Nome:</label>
+      <input type="text" id="edit-nome" name="nome" required>
+
+      <label for="edit-email">Email:</label>
+      <input type="email" id="edit-email" name="email" required>
+
+      <label for="edit-telefone">Telefone:</label>
+      <input type="text" id="edit-telefone" name="telefone" required>
+
+      <button type="submit">Salvar</button>
+      <button type="button" id="btn-cancelar">Cancelar</button>
+    </form>
+
+    <hr>
+
+    <h3>Agendamentos Pendentes</h3>
+    <ul id="agendamentos-pendentes"></ul>
+
+    <h3>Agendamentos Realizados</h3>
+    <ul id="agendamentos-realizados"></ul>
+  </div>
+</div>
+  <script>
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (!user) {
+        window.location.href = "login.html";
+      }
+    });
+  </script>
+</body>
+</html>

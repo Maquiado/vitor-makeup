@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bem-vindo - Vitor Makeup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: linear-gradient(to bottom, #0b271c, #0b271c);
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+      transition: opacity 1s ease;
+    }
+
+    body.fade-out {
+      opacity: 0;
+    }
+
+    .logo {
+      width: 300px;
+      max-width: 90%;
+      animation: fadeInScale 4s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInScale {
+      0% {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Som de entrada -->
+  <audio id="introSound" autoplay>
+    <source src="entrada.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio HTML5.
+  </audio>
+
+  <!-- Substitua pelo caminho correto da sua logobanner -->
+  <img src="img/logobanner.png" alt="Vitor Makeup" class="logo">
+
+  <script>
+    // Fade out e redirecionamento automático após 4s
+    setTimeout(() => {
+      document.body.classList.add('fade-out');
+      setTimeout(() => {
+        window.location.href = 'home.html';
+      }, 1000); // espera o fade antes de redirecionar
+    }, 4000); // tempo da animação principal
+
+    // Tocar o som de entrada se permitido
+    window.addEventListener('DOMContentLoaded', () => {
+      const sound = document.getElementById('introSound');
+      if (sound) {
+        sound.play().catch(() => {});
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minhas Bocas - Vitor Makeup</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+<link rel="stylesheet" href="fidelidade.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="titulo">💄 Minhas Bocas 💄</h1>
+    <p class="subtitulo">Acompanhe seu progresso e veja sua recompensa!</p>
+
+    <div class="busca">
+      <input
+        id="telefoneBusca"
+        type="text"
+        placeholder="Digite seu telefone (ex: 11999999999)"
+        class="input-telefone"
+      />
+      <button onclick="buscarBocas()" class="botao-buscar">
+        Ver Minhas Bocas
+      </button>
+    </div>
+
+    <div id="areaBocas" class="area-bocas"></div>
+    <p id="mensagemBonus" class="mensagem-bonus"></p>
+
+    <div class="galeria">
+      <img src="img/foto1.png" alt="Makeup 1" class="img-makeup">
+      <img src="img/foto2.png" alt="Makeup 2" class="img-makeup">
+      <img src="img/foto3.png" alt="Makeup 3" class="img-makeup">
+    </div>
+  </div>
+
+  <script>
+    async function buscarBocas() {
+      const tel = document.getElementById("telefoneBusca").value.trim();
+      const bocasEl = document.getElementById("areaBocas");
+      const mensagemEl = document.getElementById("mensagemBonus");
+      bocasEl.innerHTML = "";
+      mensagemEl.textContent = "";
+
+      if (!tel) {
+        alert("Por favor, digite seu telefone.");
+        return;
+      }
+
+      try {
+        const snap = await db.collection("clientes").where("telefone", "==", tel).get();
+
+        if (snap.empty) {
+          bocasEl.innerHTML = "<p class='text-red-600'>Cliente não encontrado.</p>";
+          return;
+        }
+
+        const cliente = snap.docs[0].data();
+        const bocas = cliente.estrelas || 0;
+
+        for (let i = 1; i <= 5; i++) {
+          const img = document.createElement("img");
+          img.src = i <= bocas ? "img/bocavermelha.png" : "img/bocavazia.png";
+          img.className = "icone-boca";
+          bocasEl.appendChild(img);
+        }
+
+        if (bocas >= 5) {
+          mensagemEl.textContent = "🎉 Parabéns! Você ganhou uma Maquiagem Express!";
+          mensagemEl.classList.add("texto-bonus");
+        }
+
+      } catch (err) {
+        console.error("Erro ao buscar bocas:", err);
+        bocasEl.innerHTML = "<p class='text-red-600'>Erro ao buscar dados.</p>";
+      }
+    }
+
+    function registrarCliente(telefone, nome) {
+      const docRef = db.collection("clientes").doc(telefone);
+
+      docRef.get().then((doc) => {
+        if (!doc.exists) {
+          docRef.set({ nome, telefone, estrelas: 1 });
+        } else {
+          docRef.update({ estrelas: firebase.firestore.FieldValue.increment(1) });
+        }
+      });
+    }
+  </script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCeRbnwjdUlkoIAtsET95m00Kds7xadecA",
+      authDomain: "vitor-makeup.firebaseapp.com",
+      projectId: "vitor-makeup",
+      storageBucket: "vitor-makeup.firebasestorage.app",
+      messagingSenderId: "968145525660",
+      appId: "1:968145525660:web:915f5e605adc86d527c659",
+      measurementId: "G-67L0EMY6WS"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
+</body>
+</html>

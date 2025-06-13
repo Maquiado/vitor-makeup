@@ -1,0 +1,149 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0f2a1e;
+  color: #f3ead2;
+}
+
+/* Hero Section */
+.hero2 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+    padding: 40px 20px;
+  justify-content: center;
+  position: relative;
+  z-index: 2; /* isso garante que o hero fique acima do quadrado */
+}
+
+
+.hero2-text {
+  flex: 1;
+  padding: 60px 40px;
+  max-width: 500px;
+    position: absolute;
+  top: 10px;
+  left: 540px;
+}
+
+.hero2-text h1 {
+  font-size: 48px;
+  line-height: 1.2;
+  color: #f3ead2;
+  
+}
+
+.hero2-text p {
+  margin: 20px 0;
+  font-size: 18px;
+  color: #e0d7c2;
+  
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #b4492d;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.hero2-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  max-height: 100vh;
+  margin-left: 400px; /* aumenta o espaço entre texto e imagem */
+  
+}
+
+.hero2-image img {
+  width: 100%;
+  height: auto;
+  max-width: 400px;
+  object-fit: cover;
+  display: block;
+  
+}
+
+/* Portfolio Section */
+/* Portfolio Section */
+.portfolio-section {
+  position: relative;
+  background-color: #0f2a1e;
+  padding: 40px 20px;
+  color: #f3ead2;
+  margin-top: -100px; /* sobrepõe o hero */
+  z-index: 0;
+}
+
+.portfolio-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+   margin-left: 600px; /* ajusta o valor para mover mais ou menos */
+  z-index: 2;
+  
+  position: relative;
+}
+
+.portfolio-area {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.orange-background {
+  position: absolute;
+  background-color: #8c3c1e;
+  top: -200px;             /* sobe o quadrado */
+  left: 27%;              /* desloca para a direita */
+  width: 30%;
+  height: 550px;          /* altura reduzida */
+  z-index: 0;
+  border-radius: 8px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 800px;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+/* Testimonials */
+.testimonials {
+  background-color: #f3ead2;
+  color: #0f2a1e;
+  padding: 40px 20px;
+  text-align: left;
+    text-align: center;
+}
+
+.testimonials h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.testimonials p {
+  font-size: 18px;
+  font-style: italic;
+}

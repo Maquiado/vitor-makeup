@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Promoções e Cupons</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="cupom.css" />
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+
+  <script src="firebase.js"></script>
+  <script src="cupom.js" defer></script>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>👑 Vitor Makeup</h2>
+    <button onclick="window.location.href='calendario.html'">📅 Calendário</button>
+    <button onclick="window.location.href='agendamentos.html'">🗓️ Agendamentos</button>
+    <button onclick="window.location.href='realizados.html'">✔️ Realizados</button>
+    <button onclick="window.location.href='clientes.html'">👥 Clientes</button>
+    <button onclick="window.location.href='servicos.html'">💄 Serviços</button>
+    <button onclick="window.location.href='dashboard.html'">📊 Dashboard</button>
+    <button onclick="window.location.href='promocoes.html'">🏷️ Promoções</button>
+    <button onclick="logout()">🚪 Sair</button>
+  </div>
+
+  <div class="content">
+    <h1>Promoções e Cupons</h1>
+    <button id="btn-nova-promocao">+ Nova Promoção / Cupom</button>
+
+    <div id="lista-promocoes" class="lista-promocoes"></div>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal-promocao" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span id="modal-close" class="modal-close">&times;</span>
+
+      <form id="form-promocao">
+        <h2 id="modal-title">Nova Promoção / Cupom</h2>
+
+        <label for="codigo-promocao">Código do Cupom:</label>
+        <input type="text" id="codigo-promocao" name="codigo" required />
+
+        <label for="descricao-promocao">Descrição:</label>
+        <textarea id="descricao-promocao" name="descricao"></textarea>
+
+        <label for="desconto-promocao">Desconto (%):</label>
+        <input type="number" id="desconto-promocao" name="desconto" min="0" max="100" required />
+
+        <label for="validade-promocao">Validade:</label>
+        <input type="date" id="validade-promocao" name="validade" required />
+
+        <button type="submit">Salvar</button>
+        <button type="button" id="btn-cancelar">Cancelar</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Serviços</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="servicos.css" />
+  <!-- firebase.js -->
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+  <script src="firebase.js"></script>
+  <script src="servicos.js" defer></script>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>👑 Vitor Makeup</h2>
+<button onclick="window.location.href='calendario.html'">📅 Calendário</button>            <!-- já ótimo! -->
+<button onclick="window.location.href='agendamentos.html'">🗓️ Agendamentos</button>         <!-- calendário com folha -->
+<button onclick="window.location.href='realizados.html'">✔️ Realizados</button>             <!-- check simples -->
+<button onclick="window.location.href='clientes.html'">👥 Clientes</button>                <!-- ótimo, pessoas -->
+<button onclick="window.location.href='servicos.html'">💄 Serviços</button>               <!-- ótimo -->
+<button onclick="window.location.href='dashboard.html'">📊 Dashboard</button>             <!-- gráfico de barras -->
+    <button onclick="logout()">🚪 Sair</button>
+  </div>
+
+  <div class="content">
+    <h1>Serviços</h1>
+
+    <button id="btn-novo-servico">+ Novo Serviço</button>
+
+    <div id="lista-servicos" class="lista-servicos"></div>
+  </div>
+
+  <!-- Modal de serviço -->
+  <div id="modal-servico" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span id="modal-close" class="modal-close">&times;</span>
+
+      <form id="form-servico">
+        <h2 id="modal-title">Novo Serviço</h2>
+
+        <label for="nome-servico">Nome:</label>
+        <input type="text" id="nome-servico" name="nome" required />
+
+        <label for="descricao-servico">Descrição:</label>
+        <textarea id="descricao-servico" name="descricao" required></textarea>
+
+        <label for="tempo-servico">Tempo (minutos):</label>
+        <input type="number" id="tempo-servico" name="tempo" min="1" required />
+
+        <label for="valor-servico">Valor (R$):</label>
+        <input type="number" id="valor-servico" name="valor" min="0" step="0.01" required />
+
+        <button type="submit">Salvar</button>
+        <button type="button" id="btn-cancelar">Cancelar</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agendamento - Vitor Makeup</title>
+  <link rel="stylesheet" href="agendamento.css" />
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- Etapa 1 -->
+<div class="step step-1 active">
+  <div id="servicos-container"></div>
+  <button id="btnToStep2" disabled>Avançar</button>
+</div>
+
+    <!-- Etapa 2 -->
+    <div class="step step-2">
+      <h2>Escolha a data e horário</h2>
+      <input type="date" id="data" />
+      <select id="horarios"></select>
+      <button id="btnBackToStep1" class="voltar">Voltar</button>
+      <button id="btnToStep3" disabled>Avançar</button>
+    </div>
+
+<!-- Etapa 3 -->
+<div class="step step-3">
+  <h2>Seus dados</h2>
+  <input type="text" id="nome" placeholder="Nome completo" readonly />
+  <input type="tel" id="telefone" placeholder="Telefone / WhatsApp" readonly />
+  <input type="email" id="email" placeholder="Email" readonly />
+
+  <!-- Novo campo para cupom -->
+  <input type="text" id="codigo-cupom" placeholder="Código do cupom (opcional)" />
+
+  <button id="btnBackToStep2" class="voltar">Voltar</button>
+  <button id="btnToStep4">Avançar</button>
+</div>
+
+    <!-- Etapa 4 -->
+    <div class="step step-4">
+      <h2>Confirmação</h2>
+      <div class="resumo" id="resumo"></div>
+      <button id="btnBackToStep3" class="voltar">Voltar</button>
+      <button id="btnConfirmar">Confirmar Agendamento</button>
+    </div>
+
+    <!-- Mensagem Sucesso -->
+    <div class="sucesso" id="mensagemSucesso" style="display: none;">
+      <h2>🎉 Maquiagem agendada com sucesso!</h2>
+      <p>Entraremos em contato com você pelo Instagram.</p>
+      <button onclick="location.reload()">Novo agendamento</button>
+    </div>
+  </div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCeRbnwjdUlkoIAtsET95m00Kds7xadecA",
+      authDomain: "vitor-makeup.firebaseapp.com",
+      projectId: "vitor-makeup",
+      storageBucket: "vitor-makeup.appspot.com",
+      messagingSenderId: "968145525660",
+      appId: "1:968145525660:web:915f5e605adc86d527c659",
+      measurementId: "G-67L0EMY6WS"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    let agendamento = {};
+
+    const steps = document.querySelectorAll('.step');
+    function showStep(i) {
+      steps.forEach((step, idx) => step.classList.toggle('active', idx === i));
+    }
+
+    const servicosContainer = document.getElementById('servicos-container');
+
+// Carrega os serviços do Firestore e monta os cards
+db.collection("servicos").get().then(snapshot => {
+  snapshot.forEach(doc => {
+    const s = doc.data();
+    const card = document.createElement('div');
+    card.className = 'card-servico';
+    card.dataset.nome = s.nome;
+    card.dataset.valor = s.valor;
+    card.dataset.tempo = s.tempo;
+
+    card.innerHTML = `
+      <div class="imagem-container-servico">
+        <img src="img/agendamento.png" alt="${s.nome}" class="imagem-servico-fundo" />
+        <div class="overlay-escuro">
+          <div class="conteudo-overlay">
+            <h3>${s.nome}</h3>
+            <p>${s.descricao}</p>
+            <small>R$${s.valor} - ${s.tempo} minutos</small>
+          </div>
+        </div>
+      </div>
+    `;
+
+    // Clique do card
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.card-servico').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      document.getElementById('btnToStep2').disabled = false;
+
+      agendamento.tipo = s.nome;
+      agendamento.valor = s.valor;
+      agendamento.duracao = parseInt(s.tempo);
+    });
+
+    servicosContainer.appendChild(card);
+  });
+}).catch(err => {
+  console.error("Erro ao carregar serviços:", err);
+  servicosContainer.innerHTML = "<p>Erro ao carregar os serviços. Tente novamente mais tarde.</p>";
+});
+
+    document.querySelectorAll('.card-servico').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.card-servico').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        document.getElementById('btnToStep2').disabled = false;
+        console.log("Enviando agendamento:", agendamento);
+
+        agendamento.tipo = card.dataset.nome;
+        agendamento.valor = card.dataset.valor;
+        agendamento.duracao = parseInt(card.dataset.tempo);
+      });
+    });
+
+    document.getElementById('btnToStep2').addEventListener('click', () => showStep(1));
+
+    const dataInput = document.getElementById('data');
+    const horariosSelect = document.getElementById('horarios');
+
+    const hoje = new Date().toISOString().split('T')[0];
+    dataInput.min = hoje;
+
+    dataInput.addEventListener('change', disponibilidade);
+    horariosSelect.addEventListener('change', () => {
+      document.getElementById('btnToStep3').disabled = !horariosSelect.value;
+    });
+
+    async function disponibilidade() {
+      const data = dataInput.value;
+      if (!data || !agendamento.duracao) return;
+
+      // Busca horários permitidos definidos no painel
+      const doc = await db.collection("disponibilidade").doc(data).get();
+
+      if (!doc.exists) {
+        horariosSelect.innerHTML = '<option>Sem horários disponíveis</option>';
+        document.getElementById('btnToStep3').disabled = true;
+        return;
+      }
+
+      const horariosPermitidos = doc.data().horarios || [];
+
+      // Busca agendamentos existentes na data
+      const snapshot = await db.collection("agendamentos")
+        .where("data", "==", data)
+        .get();
+
+      const ocupados = snapshot.docs.map(doc => {
+        const { hora, tipo } = doc.data();
+        const duracoes = {
+          "Maquiagem Básica": 40,
+          "Maquiagem Glam": 60,
+          "Maquiagem Noiva": 90
+        };
+        const ini = horaParaMin(hora);
+        const fim = ini + duracoes[tipo];
+        return { ini, fim };
+      });
+
+      // Filtra os horários permitidos removendo os que conflitam
+      const disponiveis = horariosPermitidos.filter(h => {
+        const ini = horaParaMin(h);
+        const fim = ini + agendamento.duracao;
+        return !ocupados.some(o => ini < o.fim && fim > o.ini);
+      });
+
+      horariosSelect.innerHTML = disponiveis.length
+        ? disponiveis.map(h => `<option value="${h}">${h}</option>`).join('')
+        : '<option>Sem horários disponíveis</option>';
+
+      document.getElementById('btnToStep3').disabled = !disponiveis.length;
+    }
+
+    function horaParaMin(str) {
+      const [h, m] = str.split(":").map(Number);
+      return h * 60 + m;
+    }
+
+    document.getElementById('btnToStep3').addEventListener('click', () => {
+      agendamento.data = dataInput.value;
+      agendamento.hora = horariosSelect.value;
+      showStep(2);
+    });
+
+    // Botões voltar
+    document.getElementById('btnBackToStep1').addEventListener('click', () => showStep(0));
+    document.getElementById('btnBackToStep2').addEventListener('click', () => showStep(1));
+    document.getElementById('btnBackToStep3').addEventListener('click', () => showStep(2));
+
+    // Etapa 4
+document.getElementById('btnToStep4').addEventListener('click', async () => {
+  const nome = document.getElementById('nome').value.trim();
+  const telefone = document.getElementById('telefone').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const codigoCupom = document.getElementById('codigo-cupom').value.trim();
+
+  if (!nome || !telefone) {
+    alert("Por favor, preencha seu nome e telefone para continuar.");
+    return;
+  }
+
+  agendamento.nome = nome;
+  agendamento.telefone = telefone;
+  agendamento.email = email;
+
+  // Começa com valor normal
+  let valorOriginal = parseFloat(agendamento.valor);
+  let valorFinal = valorOriginal;
+  let descontoAplicado = 0;
+
+  if (codigoCupom) {
+    try {
+      // Busca o cupom no Firestore (coleção 'promocoes') por código case-insensitive
+      const snapshot = await db.collection('promocoes')
+        .where('codigo', '==', codigoCupom.toUpperCase())
+        .get();
+
+      if (snapshot.empty) {
+        alert('Código de cupom inválido.');
+        return;
+      }
+
+      const promo = snapshot.docs[0].data();
+
+      // Verifica validade do cupom
+      const hoje = new Date();
+      const validade = promo.validade.toDate ? promo.validade.toDate() : promo.validade;
+      if (validade < hoje) {
+        alert('Este cupom está expirado.');
+        return;
+      }
+
+      descontoAplicado = Number(promo.desconto) || 0;
+      valorFinal = valorOriginal * (1 - descontoAplicado / 100);
+
+      agendamento.cupom = {
+        codigo: promo.codigo,
+        desconto: descontoAplicado,
+        valorOriginal,
+        valorComDesconto: valorFinal.toFixed(2)
+      };
+
+    } catch (err) {
+      console.error(err);
+      alert('Erro ao validar cupom. Tente novamente.');
+      return;
+    }
+  } else {
+    // Se não informou cupom, garante que não tem cupom no objeto
+    delete agendamento.cupom;
+  }
+
+  agendamento.valor = valorFinal.toFixed(2);
+
+  // Monta resumo mostrando desconto se houver
+  let resumo = `
+    <p><strong>Serviço:</strong> ${agendamento.tipo}</p>
+    <p><strong>Valor:</strong> R$${valorOriginal.toFixed(2)}</p>
+    <p><strong>Duração estimada:</strong> ${agendamento.duracao} minutos</p>
+    <p><strong>Data:</strong> ${agendamento.data}</p>
+    <p><strong>Hora:</strong> ${agendamento.hora}</p>
+    <p><strong>Nome:</strong> ${agendamento.nome}</p>
+    <p><strong>Telefone:</strong> ${agendamento.telefone}</p>
+    <p><strong>Email:</strong> ${agendamento.email}</p>
+  `;
+
+  if (descontoAplicado > 0) {
+    resumo += `
+      <p><strong>Cupom aplicado:</strong> ${codigoCupom.toUpperCase()}</p>
+      <p><strong>Desconto:</strong> ${descontoAplicado}%</p>
+      <p><strong>Valor com desconto:</strong> R$${valorFinal.toFixed(2)}</p>
+    `;
+  }
+
+  document.getElementById('resumo').innerHTML = resumo;
+
+  showStep(3);
+});
+
+document.getElementById('btnConfirmar').addEventListener('click', async () => {
+  agendamento.criadoEm = new Date();
+    agendamento.status = 'pendente';  // <-- adiciona aqui
+  try {
+    await db.collection("agendamentos").add(agendamento);
+    document.querySelector('.step-4').style.display = 'none';
+    const mensagem = document.getElementById('mensagemSucesso');
+    mensagem.style.display = 'flex';
+    mensagem.style.flexDirection = 'column';
+    mensagem.style.alignItems = 'center';
+    mensagem.style.justifyContent = 'center';
+    mensagem.style.height = '100vh';
+  } catch (err) {
+    alert("Erro ao salvar agendamento: " + err.message);
+  }
+});
+
+    function enviarWhatsapp(telefone, mensagem) {
+      const numeroFormatado = telefone.replace(/\D/g, ""); // Remove tudo que não for número
+      const payload = {
+        phone: `55${numeroFormatado}`, // Ex: 5591999999999
+        message: mensagem
+      };
+
+      fetch("https://api.z-api.io/instances/SEU_ID/token/SEU_TOKEN/send-messages", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log("Mensagem enviada:", data);
+      })
+      .catch(err => console.error("Erro ao enviar mensagem:", err));
+    }
+    const auth = firebase.auth();
+
+auth.onAuthStateChanged(async user => {
+  if (user) {
+    // Preenche email diretamente do objeto de autenticação
+    document.getElementById('email').value = user.email || "";
+
+    try {
+      const docRef = db.collection("usuarios").doc(user.uid);
+      const docSnap = await docRef.get();
+
+      if (docSnap.exists) {
+        const dados = docSnap.data();
+        document.getElementById('nome').value = dados.nome || "";
+        document.getElementById('telefone').value = dados.telefone || "";
+      } else {
+        console.warn("Usuário autenticado, mas sem dados em 'usuarios'");
+        alert("Seu perfil não está completo. Entre em contato com o suporte.");
+      }
+    } catch (error) {
+      console.error("Erro ao buscar dados do usuário:", error);
+      alert("Erro ao carregar seus dados. Tente novamente.");
+    }
+  } else {
+    alert("Você precisa estar logado para agendar.");
+    window.location.href = 'logincliente.html';
+  }
+});
+window.onload = () => {
+  const btnSair = document.getElementById('btnSair');
+  if (btnSair) {
+    btnSair.addEventListener('click', () => {
+      window.location.href = 'cliente.html'; // coloque aqui o caminho correto para o painel
+    });
+  }
+};
+  </script>
+  <!-- Botão Sair fixo -->
+<button id="btnSair" style="
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #e63946;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 1000;
+">
+  Sair
+</button>
+</body>
+</html>

@@ -1,0 +1,514 @@
+/* Reset e Fonte */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Playfair Display', serif;
+  background-color: #f9f7f1;
+  color: #244236;
+  line-height: 1.6;
+}
+
+main {
+  max-width: 720px;
+  width: 100%;
+  padding: 3rem 2rem;
+  background-color: rgba(249, 247, 241, 0.85); /* translúcido */
+  border-radius: 20px;
+}
+
+/* Cabeçalho */
+header.topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #244236;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+
+.logo-area img {
+  height: 50px;
+  transition: transform 0.3s ease;
+}
+
+.logo-area img:hover {
+  transform: scale(1.05);
+}
+
+nav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+nav a:hover {
+  color: #e7e4c5;
+}
+
+.btn-agendar {
+  background-color: #e7e4c5;
+  color: #244236;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.btn-agendar:hover {
+  background-color: #dcd8b7;
+  transform: scale(1.05);
+}
+
+.btn-adm {
+  background-color: #e7e4c5;
+  color: #244236;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.btn-adm:hover {
+  background-color: #dcd8b7;
+  transform: scale(1.05);
+}
+
+.btn-cadastrar {
+  background-color: #8b3024;
+  color: #e4dccc;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.btn-cadastrar:hover {
+  background-color: #ad3728;
+  transform: scale(1.05);
+}
+
+/* HERO */
+.hero {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 0;
+  background-color: #f1efe7;
+}
+
+.hero-img-slider {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  border-radius: 0;
+}
+
+.slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.hero-text {
+  max-width: 400px;
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-align: left;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  header.topo {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding: 0.8rem 1.2rem;
+  }
+
+  .logo-area img {
+    height: 40px;
+  }
+
+  nav {
+    gap: 0.5rem;
+  }
+
+  .hero {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .hero-text {
+    font-size: 1.2rem;
+    max-width: 240px;
+  }
+
+  .hero-img-slider {
+    max-width: 200px;
+  }
+}
+
+/*Fidelidade*/
+.fidelidade {
+  background-image: url('img/bg-bocas.png'); /* ajuste o caminho se necessário */
+  background-repeat: repeat;
+  background-size: auto;
+  background-color: #7e1b1b; /* cor de fundo de base semelhante ao vermelho da imagem */
+  padding: 4rem 2rem;
+  color: #fef9f4;
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+}
+
+.fidelidade-container {
+  max-width: 600px;
+  margin: auto;
+  background-color: #f5f0e8;
+  border-radius: 16px;
+  padding: 30px 20px;
+  color: #19352f;
+}
+
+.fidelidade-titulo {
+  font-size: 2.2rem;
+  color: #19352f;
+  margin-bottom: 20px;
+}
+
+.fidelidade-descricao {
+  font-size: 1rem;
+  color: #19352f;
+  margin-bottom: 30px;
+}
+
+.fidelidade-form {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.input-telefone {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  width: 220px;
+}
+
+.botao-buscar {
+  background-color: #19352f;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.botao-buscar:hover {
+  background-color: #285445;
+}
+
+.resultado-bocas {
+  margin-top: 20px;
+}
+
+.nome-cliente {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.area-bocas img {
+  width: 32px;
+  height: 32px;
+  margin: 0 4px;
+}
+
+.mensagem-bonus {
+  color: #b22222;
+  font-weight: bold;
+  margin-top: 12px;
+}
+
+@media (max-width: 480px) {
+  .fidelidade {
+    padding: 2rem 1rem;
+  }
+
+  .fidelidade-container {
+    padding: 20px 15px;
+  }
+
+  .fidelidade-titulo {
+    font-size: 1.8rem;
+  }
+
+  .fidelidade-descricao {
+    font-size: 0.95rem;
+  }
+
+  .input-telefone {
+    width: 100%;
+  }
+
+  .fidelidade-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .botao-buscar {
+    width: 100%;
+  }
+
+  .area-bocas img {
+    width: 28px;
+    height: 28px;
+    margin: 3px;
+  }
+}
+
+/* Hero Section */
+.hero2 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+    padding: 0px 00px;
+  justify-content: center;
+  position: relative;
+  z-index: 2; /* isso garante que o hero fique acima do quadrado */
+}
+
+
+.hero2-text {
+  flex: 1;
+  padding: 70px 100px;
+  max-width: 400px;
+    position: absolute;
+  top: 10px;
+  left: 600px;
+}
+
+.hero2-text h1 {
+  font-size: 48px;
+  line-height: 1.2;
+  color: #f3ead2;
+  
+}
+
+.hero2-text p {
+  margin: 20px 0;
+  font-size: 18px;
+  color: #e0d7c2;
+  
+}
+
+.btn2 {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #b4492d;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.hero2-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  max-height: 100vh;
+  margin-left: 400px; /* aumenta o espaço entre texto e imagem */
+  
+}
+
+.hero2-image img {
+  width: 100%;
+  height: auto;
+  max-width: 350px;
+  object-fit: cover;
+  display: block;
+  
+}
+
+/* Portfolio Section */
+/* Portfolio Section */
+.portfolio-section {
+  position: relative;
+  background-color: #0f2a1e;
+  padding: 40px 5px;
+  color: #f3ead2;
+  margin-top: -20px; /* sobrepõe o hero */
+  z-index: 0;
+}
+
+.portfolio-title {
+  font-size: 30px;
+  margin-bottom: 20px;
+   margin-left: 800px; /* ajusta o valor para mover mais ou menos */
+  z-index: 2;
+  
+  position: relative;
+}
+
+.portfolio-area {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.orange-background {
+  position: absolute;
+  background-color: #8c3c1e;
+  top: -200px;             /* sobe o quadrado */
+  left: 32%;              /* desloca para a direita */
+  width: 30%;
+  height: 400px;          /* altura reduzida */
+  z-index: 0;
+  border-radius: 8px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 600px;
+    margin-left: 150px;
+}
+
+.gallery img {
+  width: 100%;
+      aspect-ratio: 1 / 1; /* força imagem quadrada */
+      object-fit: cover; /* garante que preencha sem deformar */
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+/* Testimonials */
+.testimonials {
+  background-color: #f3ead2;
+  color: #0f2a1e;
+  padding: 40px 20px;
+  text-align: left;
+    text-align: center;
+}
+
+.testimonials h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.testimonials p {
+  font-size: 18px;
+  font-style: italic;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0f2a1e;
+  color: #f3ead2;
+}
+
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.lightbox.show {
+  display: flex;
+}
+
+.legenda-expansao {
+  font-size: 0.9rem;
+  color: #ffffff;
+  margin-top: -8px;
+  margin-bottom: 16px;
+  text-align: center;
+  font-style: italic;
+  z-index: 2;
+  position: relative;
+}
